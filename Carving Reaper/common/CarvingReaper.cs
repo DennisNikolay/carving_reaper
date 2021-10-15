@@ -5,22 +5,36 @@ public class CarvingReaper : KinematicBody2D
 {
 
     [Export]
-    float speed  = 100;
+    float speed = 20;
+
+    [Export] float maxSpeed = 200;
+    [Export] float friction = 10;
+
+    Vector2 velocity;
 
     public override void _Ready()
     {
 
     }
 
-    public override void _PhysicsProcess(float delta){
-        GlobalPosition += delta * speed * GetUserMovementInput();
+    public override void _PhysicsProcess(float delta)
+    {
+        Vector2 moveInput = GetUserMovementInput();
+
+        if (velocity.Length() < maxSpeed)
+            velocity += delta * speed * moveInput;
+
+        if (moveInput.Length() == 0)
+            velocity = velocity.MoveToward(Vector2.Zero, delta * friction);
+
+        KinematicCollision2D obstacle = MoveAndCollide(velocity);
     }
 
     protected Vector2 GetUserMovementInput()
     {
         return new Vector2(
-            GetRightMovement()-GetLeftMovement(),
-            GetDownMovement()-GetUpMovement()
+            GetRightMovement() - GetLeftMovement(),
+            GetDownMovement() - GetUpMovement()
         );
     }
 
