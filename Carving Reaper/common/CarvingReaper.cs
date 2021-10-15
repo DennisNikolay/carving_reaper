@@ -30,6 +30,11 @@ public class CarvingReaper : KinematicBody2D
         KinematicCollision2D obstacle = MoveAndCollide(velocity);
     }
 
+    public void HandleObstacleCollision(){
+        GD.Print("Obstacle hit");
+        GetTree().ReloadCurrentScene();
+    }
+
     protected Vector2 GetUserMovementInput()
     {
         return new Vector2(
