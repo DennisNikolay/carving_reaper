@@ -7,6 +7,8 @@ public class CarvingReaperMovementState
     protected MovementData movementSettings;
     protected Vector2 velocity = Vector2.Zero;
 
+    public Vector2 Velocity { get { return velocity; } set { velocity = value; } }
+
     public CarvingReaperMovementState(MovementData initialMovementSettings)
     {
         movementSettings = initialMovementSettings;

@@ -23,6 +23,7 @@ extents = Vector2( 100, 1e+07 )
 [node name="Level" type="YSort"]
 script = ExtResource( 5 )
 scoreLabelPath = NodePath("HUD/ScoreLabel")
+playerPath = NodePath("CarvingReaper")
 
 [node name="Snow" type="Sprite" parent="."]
 position = Vector2( 0, -72768 )

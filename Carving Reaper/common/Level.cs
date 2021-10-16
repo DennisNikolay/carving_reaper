@@ -7,14 +7,17 @@ public class Level : Node2D
 
     [Export]
     NodePath scoreLabelPath;
+    [Export]
+    NodePath playerPath;
 
     Label scoreLabel;
-
-    float scoreTimer = 0;
+    CarvingReaper player;
+    float prevScorePos = 0;
 
     public override void _Ready()
     {
         scoreLabel = GetNode<Label>(scoreLabelPath);
+        player = GetNode<CarvingReaper>(playerPath);
         game = new Game();
         game.gameOverEvent += Reload;
         game.changeScoreEvent += ChangeScoreText;
@@ -29,10 +32,9 @@ public class Level : Node2D
 
     void IncreaseScoreOverTime(float delta)
     {
-        scoreTimer += delta;
-        if (scoreTimer > 0.8f)
+        if (-player.GlobalPosition.y > prevScorePos + 400)
         {
-            scoreTimer = 0;
+            prevScorePos = -player.GlobalPosition.y;
             Game.IncreaseScore(1);
         }
 

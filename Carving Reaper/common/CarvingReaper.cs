@@ -4,18 +4,18 @@ using System;
 public class CarvingReaper : KinematicBody2D
 {
     [Export]
-    float acceleration = 30.0f;
+    float acceleration = 1000.0f;
     [Export]
-    float breakAcceleration = 70.0f;
+    float breakAcceleration = 1700.0f;
 
     [Export]
-    float maxSpeedX = 20f, maxSpeedY = 50f;
+    float maxSpeedX = 1000f, maxSpeedY = 2000f;
 
     [Export]
-    float friction = 10;
+    float friction = 900;
 
     [Export]
-    float breakPoint = -10;
+    float breakPoint = -900;
 
     [Export]
     bool debug = false;
@@ -94,7 +94,7 @@ public class CarvingReaper : KinematicBody2D
     public override void _PhysicsProcess(float delta)
     {
         Vector2 velocityAfterInput = movementState.MoveByInput(delta, GetUserMovementInput());
-        KinematicCollision2D obstacle = MoveAndCollide(velocityAfterInput);
+        movementState.Velocity = MoveAndSlide(velocityAfterInput);
         HandleSlideAnimation(velocityAfterInput);
         if (debug && debugArrow != null)
             DrawDebugLine(delta);
