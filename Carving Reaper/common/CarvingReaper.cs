@@ -4,38 +4,26 @@ using System;
 public class CarvingReaper : KinematicBody2D
 {
 
-    [Export]
-    float speed = 20;
+    CarvingReaperMovementState movementState;
 
-    [Export] float maxSpeed = 200;
-    [Export] float friction = 10;
-
-    Vector2 velocity;
-
-    public override void _Ready()
-    {
-
-    }
+   public CarvingReaper(){
+       movementState = new CarvingReaperMovementState();
+   }
 
     public override void _PhysicsProcess(float delta)
     {
-        Vector2 moveInput = GetUserMovementInput();
-
-        if (velocity.Length() < maxSpeed)
-            velocity += delta * speed * moveInput;
-
-        if (moveInput.Length() == 0)
-            velocity = velocity.MoveToward(Vector2.Zero, delta * friction);
-
-        KinematicCollision2D obstacle = MoveAndCollide(velocity);
+        Vector2 velocityAfterInput = movementState.MoveByInput(delta, GetUserMovementInput());
+        KinematicCollision2D obstacle = MoveAndCollide(velocityAfterInput);
     }
 
-    public void HandleObstacleCollision(){
+
+    public void HandleObstacleCollision()
+    {
         GD.Print("Obstacle hit");
         GetTree().ReloadCurrentScene();
     }
 
-    protected Vector2 GetUserMovementInput()
+    public Vector2 GetUserMovementInput()
     {
         return new Vector2(
             GetRightMovement() - GetLeftMovement(),
@@ -43,20 +31,20 @@ public class CarvingReaper : KinematicBody2D
         );
     }
 
-    protected float GetLeftMovement()
+    public float GetLeftMovement()
     {
         return Input.GetActionStrength("move_left");
     }
 
-    protected float GetRightMovement()
+    public float GetRightMovement()
     {
         return Input.GetActionStrength("move_right");
     }
-    protected float GetUpMovement()
+    public float GetUpMovement()
     {
         return Input.GetActionStrength("move_up");
     }
-    protected float GetDownMovement()
+    public float GetDownMovement()
     {
         return Input.GetActionStrength("move_down");
     }
