@@ -3,17 +3,35 @@ using System;
 
 public class CarvingReaper : KinematicBody2D
 {
-    CarvingReaperMovementState movementState;
+    [Export]
+    float acceleration = 20;
+
+    [Export]
+    float maxSpeed = 200;
+
+    [Export]
+    float friction = 10;
+
+    [Export]
+    float baseSpeed = 5;
+
+    [Export]
+    bool debug = false;
+
+    protected CarvingReaperMovementState movementState;
+    protected Line2D debugArrow;
     HitBox hitBox;
 
     public CarvingReaper()
     {
-        movementState = new CarvingReaperMovementState();
-    }
+        movementState = new CarvingReaperMovementState(
+            new MovementData(acceleration, maxSpeed, friction, baseSpeed)
+        );    }
 
     public override void _Ready()
     {
         base._Ready();
+        CallDeferred(nameof(AddDebugArrow));
         hitBox = GetNode<HitBox>("HitBox");
     }
 
@@ -25,11 +43,13 @@ public class CarvingReaper : KinematicBody2D
             hitBox?.Attack();
         }
     }
-
+    
     public override void _PhysicsProcess(float delta)
     {
         Vector2 velocityAfterInput = movementState.MoveByInput(delta, GetUserMovementInput());
         KinematicCollision2D obstacle = MoveAndCollide(velocityAfterInput);
+        if (debug && debugArrow != null)
+            DrawDebugLine(delta);
     }
 
 
@@ -37,6 +57,21 @@ public class CarvingReaper : KinematicBody2D
     {
         GD.Print("Obstacle hit");
         Game.GameOver();
+    }
+
+    protected void AddDebugArrow()
+    {
+        debugArrow = new Line2D();
+        GetParent().AddChild(debugArrow);
+    }
+    protected void DrawDebugLine(float delta)
+    {
+        Vector2 velocityTarget = GlobalPosition + 10 * movementState.MoveByInput(delta, GetUserMovementInput());
+        debugArrow.RemovePoint(0);
+        debugArrow.RemovePoint(1);
+        debugArrow.AddPoint(GlobalPosition, 0);
+        debugArrow.AddPoint(velocityTarget, 1);
+        debugArrow.Update();
     }
 
     protected Vector2 GetUserMovementInput()

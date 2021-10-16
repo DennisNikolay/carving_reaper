@@ -4,25 +4,53 @@ using System;
 public class CarvingReaperMovementState
 {
 
-    [Export]
-    float speed = 20;
+    protected MovementData movementSettings;
+    protected Vector2 velocity = Vector2.Zero;
 
-    [Export] 
-    float maxSpeed = 200;
-
-    [Export] 
-    float friction = 10;
-
-    Vector2 velocity = Vector2.Zero;
+    public CarvingReaperMovementState(MovementData initialMovementSettings)
+    {
+        movementSettings = initialMovementSettings;
+    }
 
     public Vector2 MoveByInput(float delta, Vector2 moveInput)
     {
-        if (velocity.Length() < maxSpeed)
-            velocity += delta * speed * moveInput;
+        if (moveInput.Length() > movementSettings.maxSpeed)
+        {
+            moveInput = moveInput * (movementSettings.maxSpeed / moveInput.Length());
+        }
+
+        float velocityX = moveInput.x;
+        float velocityY = moveInput.y;
+
+
+        velocity += delta * movementSettings.acceleration * new Vector2(
+            velocityX,
+            velocityY
+        );
+
+        if (velocity.y >= -10f)
+        {
+            velocity.y = (float)-10f;
+        }
 
         if (moveInput.Length() == 0)
-            velocity = velocity.MoveToward(Vector2.Zero, delta * friction);
-        
+            velocity = velocity.MoveToward(movementSettings.GetBaseVelocity(), delta * movementSettings.friction);
+
+        if (velocity.x > movementSettings.maxSpeed)
+        {
+            velocity.x = movementSettings.maxSpeed;
+        }
+
+        if (velocity.y > movementSettings.maxSpeed)
+        {
+            velocity.y = movementSettings.maxSpeed;
+        }
+
+        return velocity;
+    }
+
+    public Vector2 GetCurrentVelocity()
+    {
         return velocity;
     }
 
