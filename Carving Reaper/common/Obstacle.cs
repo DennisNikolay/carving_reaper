@@ -16,4 +16,8 @@ public class Obstacle : StaticBody2D
         body.HandleObstacleCollision();
     }
 
+    public void ObstacleCollision(Obstacle obstacle){
+        obstacle.QueueFree();
+    }
+
 }

@@ -4,9 +4,14 @@ using System;
 public class Level : Node2D
 {
     Game game;
-    [Export] NodePath scoreLabelPath;
+
+    [Export]
+    NodePath scoreLabelPath;
+
     Label scoreLabel;
+
     float scoreTimer = 0;
+
     public override void _Ready()
     {
         scoreLabel = GetNode<Label>(scoreLabelPath);
