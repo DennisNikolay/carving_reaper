@@ -1,19 +1,23 @@
 using Godot;
 using System;
-
+using Godot.Collections;
 public class Victim : KinematicBody2D
 {
     Vector2 velocity, direction;
     [Export] float baseMaxSpeed = 1000;
     [Export] float acceleration = 900;
+    [Export] Array<Texture> skins = new Array<Texture>();
     float maxSpeed;
     AnimationPlayer animationPlayer;
+    Sprite characterSprite;
     bool dying = false;
     const string bloodFolder = "res://sprites/Blood/";
 
     public override void _Ready()
     {
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        characterSprite = GetNode<Sprite>("Sprite");
+        characterSprite.Texture = skins[Game.RandomRange(0, skins.Count)];
         baseMaxSpeed = baseMaxSpeed * (1.1f - Game.RandomValue * 0.2f);
         maxSpeed = baseMaxSpeed * (1.2f - 0.4f * Game.RandomValue);
         direction = Vector2.Up + (0.1f - 0.2f * Game.RandomValue) * Vector2.Right;
@@ -38,7 +42,6 @@ public class Victim : KinematicBody2D
 
         Game.IncreaseScore(20);
         float rng = Game.RandomValue;
-        BloodSpawn();
         if (rng < 0.33f)
         {
             animationPlayer.Play("die1");

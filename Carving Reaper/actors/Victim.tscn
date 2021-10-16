@@ -1,9 +1,12 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://common/Victim.cs" type="Script" id=1]
-[ext_resource path="res://sprites/NPC/NPC Spritesheet.png" type="Texture" id=2]
+[ext_resource path="res://sprites/NPC/NPC 1.png" type="Texture" id=2]
+[ext_resource path="res://sprites/NPC/NPC 3.png" type="Texture" id=3]
+[ext_resource path="res://sprites/NPC/NPC 2.png" type="Texture" id=4]
+[ext_resource path="res://sprites/NPC/NPC 4.png" type="Texture" id=5]
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=1]
 resource_name = "die1"
 length = 0.4
 step = 0.2
@@ -19,8 +22,22 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 10, 11 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "BloodSpawn"
+} ]
+}
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=2]
 resource_name = "die2"
 length = 0.4
 step = 0.2
@@ -36,8 +53,22 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 12, 13 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "BloodSpawn"
+} ]
+}
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=3]
 resource_name = "die3"
 length = 0.4
 step = 0.2
@@ -53,8 +84,22 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 14, 15 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "BloodSpawn"
+} ]
+}
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=4]
 length = 0.8
 loop = true
 step = 0.2
@@ -71,7 +116,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=5]
 length = 0.6
 loop = true
 step = 0.2
@@ -129,14 +174,15 @@ z_index = 2
 collision_layer = 8
 collision_mask = 10
 script = ExtResource( 1 )
+skins = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ) ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
-anims/die1 = SubResource( 9 )
-anims/die2 = SubResource( 10 )
-anims/die3 = SubResource( 11 )
-anims/idle = SubResource( 12 )
-anims/slide = SubResource( 13 )
+anims/die1 = SubResource( 1 )
+anims/die2 = SubResource( 2 )
+anims/die3 = SubResource( 3 )
+anims/idle = SubResource( 4 )
+anims/slide = SubResource( 5 )
 anims/slide_end = SubResource( 6 )
 anims/slide_start = SubResource( 7 )
 
@@ -145,7 +191,7 @@ position = Vector2( 0, -89 )
 texture = ExtResource( 2 )
 hframes = 4
 vframes = 4
-frame = 14
+frame = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
