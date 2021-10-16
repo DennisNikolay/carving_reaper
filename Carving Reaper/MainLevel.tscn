@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://actors/CarvingReaper.tscn" type="PackedScene" id=1]
+[ext_resource path="res://obstacles/Tree.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sprites/Level/SchneebodenTile.png" type="Texture" id=3]
 [ext_resource path="res://actors/Spawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://common/Level.cs" type="Script" id=5]
 [ext_resource path="res://misc/fonts/Snowburst_One/SnowburstOne-Regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://obstacles/TreeStomp.tscn" type="PackedScene" id=7]
+[ext_resource path="res://obstacles/Stone.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 90
@@ -14,13 +17,17 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 6 )
 
-[node name="Level" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 100, 1e+07 )
+
+[node name="Level" type="YSort"]
 script = ExtResource( 5 )
 scoreLabelPath = NodePath("HUD/ScoreLabel")
 
 [node name="Snow" type="Sprite" parent="."]
-position = Vector2( 0, -70000 )
+position = Vector2( 0, -72768 )
 scale = Vector2( 5, 5 )
+z_index = -1
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1000, 30000 )
@@ -33,6 +40,12 @@ acceleration = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="CarvingReaper"]
 current = true
+zoom = Vector2( 1.5, 1.5 )
+limit_left = -2500
+limit_right = 2500
+limit_smoothed = true
+offset_v = -1.0
+drag_margin_bottom = 0.6
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -51,3 +64,52 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Obstacles" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Tree" parent="Obstacles" instance=ExtResource( 2 )]
+position = Vector2( -1195.65, -4987.75 )
+
+[node name="Tree2" parent="Obstacles" instance=ExtResource( 2 )]
+position = Vector2( 795.856, -6403.4 )
+
+[node name="Tree3" parent="Obstacles" instance=ExtResource( 2 )]
+position = Vector2( 1923.58, -4795.8 )
+
+[node name="Stone" parent="Obstacles" instance=ExtResource( 8 )]
+position = Vector2( -995.7, -7483.13 )
+
+[node name="TreeStomp" parent="Obstacles" instance=ExtResource( 7 )]
+position = Vector2( 763.864, -8338.92 )
+
+[node name="Tree4" parent="Obstacles" instance=ExtResource( 2 )]
+position = Vector2( -987.702, -9874.54 )
+
+[node name="Stone2" parent="Obstacles" instance=ExtResource( 8 )]
+position = Vector2( 1291.73, -9730.58 )
+
+[node name="Tree5" parent="Obstacles" instance=ExtResource( 2 )]
+position = Vector2( 1418.1, -3832.83 )
+
+[node name="TreeStomp2" parent="Obstacles" instance=ExtResource( 7 )]
+position = Vector2( -989.301, -2673.11 )
+
+[node name="Tree6" parent="Obstacles" instance=ExtResource( 2 )]
+position = Vector2( 1266.14, -2857.07 )
+
+[node name="Boundary" type="StaticBody2D" parent="."]
+position = Vector2( -2, 0 )
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary"]
+self_modulate = Color( 0, 1, 0.0862745, 1 )
+position = Vector2( -2500, 0 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundary"]
+self_modulate = Color( 0, 1, 0.0862745, 1 )
+position = Vector2( 2500, 0 )
+shape = SubResource( 2 )

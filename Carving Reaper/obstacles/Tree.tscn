@@ -4,23 +4,22 @@
 [ext_resource path="res://common/Obstacle.cs" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 21.3273
+radius = 40.0
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 79.9903
+radius = 133.595
 height = 0.0
 
 [node name="Tree" type="StaticBody2D"]
 script = ExtResource( 2 )
 
 [node name="Tanne01" type="Sprite" parent="."]
-position = Vector2( 5.41002, -98.3008 )
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( 10.5243, -184.733 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 self_modulate = Color( 0.101961, 1, 0, 1 )
-position = Vector2( 3.20795, -62.2874 )
+position = Vector2( -3.95208, -99.6219 )
 scale = Vector2( 2.69968, 3.04856 )
 shape = SubResource( 1 )
 
@@ -30,7 +29,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 self_modulate = Color( 1, 0, 0, 1 )
-position = Vector2( -2.94061, -66.2973 )
+position = Vector2( -4.47491, -97.4946 )
 shape = SubResource( 2 )
 
 [connection signal="body_entered" from="Area2D" to="." method="PlayerEntered"]
