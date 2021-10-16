@@ -23,16 +23,14 @@ scoreLabelPath = NodePath("HUD/ScoreLabel")
 playerPath = NodePath("CarvingReaper")
 
 [node name="Snow" type="Sprite" parent="."]
-position = Vector2( 0, -72768 )
+position = Vector2( 0, -727680 )
 scale = Vector2( 5, 5 )
 z_index = -1
 texture = ExtResource( 3 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 1000, 30000 )
+region_rect = Rect2( 0, 0, 1000, 300000 )
 
 [node name="Spawner" parent="." instance=ExtResource( 4 )]
-enemySpawnDelay = 3.0
-obstacleMaxSpawnDelay = 3.0
 cameraPath = NodePath("../CarvingReaper/Camera2D")
 spawnYOffset = -1500.0
 

@@ -19,12 +19,11 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 13, 14, 15, 16 ]
+"values": [ 11, 12, 13, 14 ]
 }
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
-length = 1.2
 loop = true
 step = 0.2
 tracks/0/type = "value"
@@ -34,15 +33,15 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 5, 4 ]
+"values": [ 0, 1, 2, 3, 4 ]
 }
 
 [sub_resource type="Animation" id=3]
 resource_name = "slide"
-length = 0.8
+length = 0.6
 loop = true
 step = 0.2
 tracks/0/type = "value"
@@ -52,10 +51,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 7, 8, 9, 10 ]
+"values": [ 6, 7, 8 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -72,7 +71,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 11, 12 ]
+"values": [ 9, 10 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -89,7 +88,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 6 ]
+"values": [ 5 ]
 }
 
 [sub_resource type="CapsuleShape2D" id=6]
@@ -97,6 +96,7 @@ radius = 60.0
 height = 80.0
 
 [node name="CarvingReaper" type="KinematicBody2D"]
+z_index = 2
 collision_layer = 2
 collision_mask = 13
 script = ExtResource( 2 )
@@ -110,19 +110,20 @@ anims/slide_end = SubResource( 4 )
 anims/slide_start = SubResource( 5 )
 
 [node name="CharacterSprite" type="Sprite" parent="."]
-self_modulate = Color( 1, 0, 0, 1 )
 texture = ExtResource( 1 )
 flip_h = true
 hframes = 5
-vframes = 4
-frame = 16
+vframes = 5
+frame = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 modulate = Color( 0.172549, 1, 0, 1 )
 position = Vector2( 2.21298, 68.6019 )
 shape = SubResource( 6 )
 
 [node name="HitBox" parent="." instance=ExtResource( 3 )]
+visible = false
 position = Vector2( 1.65973, -6.6389 )
 
 [node name="ReaperSFX" type="AudioStreamPlayer2D" parent="."]

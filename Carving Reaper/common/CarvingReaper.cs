@@ -4,12 +4,12 @@ using System;
 public class CarvingReaper : KinematicBody2D
 {
     [Export]
-    float acceleration = 1000.0f;
+    float acceleration = 1200.0f;
     [Export]
-    float breakAcceleration = 1700.0f;
+    float breakAcceleration = 1800.0f;
 
     [Export]
-    float maxSpeedX = 1000f, maxSpeedY = 2000f;
+    float maxSpeedX = 1400f, maxSpeedY = 2000f;
 
     [Export]
     float friction = 900;

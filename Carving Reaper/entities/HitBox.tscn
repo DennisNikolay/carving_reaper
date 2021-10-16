@@ -3,7 +3,7 @@
 [ext_resource path="res://common/HitBox.cs" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 123.744, 95.8024 )
+extents = Vector2( 151.831, 111.974 )
 
 [node name="HitBox" type="Area2D"]
 collision_layer = 0

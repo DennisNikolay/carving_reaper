@@ -7,9 +7,9 @@ public class Spawner : Node2D
     [Export]
     PackedScene victimScene;
     [Export]
-    float enemySpawnDelay;
+    float enemySpawnDelay = 4;
     [Export]
-    float obstacleMaxSpawnDelay;
+    float obstacleMaxSpawnDelay = 10;
     [Export]
     public NodePath cameraPath;
     [Export]
@@ -80,7 +80,7 @@ public class Spawner : Node2D
     public void SpawnRandomObject()
     {
         SpawnHelper(obstacleSpawner, obstacleMaxSimultaneously);
-        obstacleSpawnTimer.WaitTime = (obstacleMaxSpawnDelay - (Game.Score/enemySpawnDelayFactor));
+        obstacleSpawnTimer.WaitTime = (obstacleMaxSpawnDelay - (Game.Score / enemySpawnDelayFactor));
     }
 
     public void SpawnRandomEnemy()
