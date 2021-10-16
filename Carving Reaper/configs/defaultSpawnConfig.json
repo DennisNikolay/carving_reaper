@@ -10,5 +10,9 @@
     {
         "resource":"res://obstacles/TreeStomp.tscn",
         "weight": 1
+    },
+    {
+        "resource": "res://actors/Victim.tscn",
+        "weight": 2
     }
 ]

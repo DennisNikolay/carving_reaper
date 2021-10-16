@@ -26,6 +26,8 @@ public class CarvingReaper : KinematicBody2D
     AnimationPlayer animationPlayer;
     Sprite characterSprite;
 
+    public static CarvingReaper activePlayer;
+
     const string attackAnim = "attack", idleAnim = "idle", slideStartAnim = "slide_start", slideAnim = "slide", slideEndAnim = "slide_end";
 
     public CarvingReaper()
@@ -38,6 +40,7 @@ public class CarvingReaper : KinematicBody2D
     public override void _Ready()
     {
         base._Ready();
+        activePlayer = this;
         CallDeferred(nameof(AddDebugArrow));
         hitBox = GetNode<HitBox>("HitBox");
         characterSprite = GetNode<Sprite>("CharacterSprite");
