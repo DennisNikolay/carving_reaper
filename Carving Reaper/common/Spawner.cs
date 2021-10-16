@@ -17,6 +17,8 @@ public class Spawner : Node2D
     
     [Export] 
     float spawnYOffset = -800;
+    [Export] 
+    int yVariation = 600;
 
     public override void _Ready(){
         InitializeSpawner();
@@ -55,7 +57,7 @@ public class Spawner : Node2D
         int randomCount = rng.Next(1, 5);
         for(int i = 0; i < randomCount; i++){
             float xOffset = 900 - rng.Next(0, 1800);
-            float smallYvariaton = 100 - rng.Next(0, 200);
+            float smallYvariaton = yVariation/2 - rng.Next(0, yVariation);
             Node2D node2d = spawner.SpawnRandomObject(
                 mainCam.GlobalPosition.x + xOffset,
                 mainCam.GlobalPosition.y + spawnYOffset + smallYvariaton
