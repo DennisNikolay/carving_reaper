@@ -23,7 +23,7 @@ public class CarvingReaper : KinematicBody2D
         GetTree().ReloadCurrentScene();
     }
 
-    public Vector2 GetUserMovementInput()
+    protected Vector2 GetUserMovementInput()
     {
         return new Vector2(
             GetRightMovement() - GetLeftMovement(),
@@ -31,20 +31,20 @@ public class CarvingReaper : KinematicBody2D
         );
     }
 
-    public float GetLeftMovement()
+    protected float GetLeftMovement()
     {
         return Input.GetActionStrength("move_left");
     }
 
-    public float GetRightMovement()
+    protected float GetRightMovement()
     {
         return Input.GetActionStrength("move_right");
     }
-    public float GetUpMovement()
+    protected float GetUpMovement()
     {
         return Input.GetActionStrength("move_up");
     }
-    public float GetDownMovement()
+    protected float GetDownMovement()
     {
         return Input.GetActionStrength("move_down");
     }

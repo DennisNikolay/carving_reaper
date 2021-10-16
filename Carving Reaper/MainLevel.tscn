@@ -7,7 +7,6 @@
 [node name="Level" type="Node2D"]
 
 [node name="testbackground" type="Sprite" parent="."]
-position = Vector2( 1.00903, 0.504517 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
