@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/skiing-loop-mono.ogg-16c6dc1234fd5e8bb2bdadcdecf2608c.oggstr"
+
+[deps]
+
+source_file="res://sounds/SFX/skiing-loop-mono.ogg"
+dest_files=[ "res://.import/skiing-loop-mono.ogg-16c6dc1234fd5e8bb2bdadcdecf2608c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

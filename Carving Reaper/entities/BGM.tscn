@@ -5,3 +5,4 @@
 [node name="BGM" type="AudioStreamPlayer"]
 stream = ExtResource( 1 )
 autoplay = true
+bus = "BGM"
