@@ -67,7 +67,8 @@ public class Victim : KinematicBody2D
         string path = $"{bloodFolder}Blood0{id}.png";
         StreamTexture bloodTexture = ResourceLoader.Load<StreamTexture>(path);
         Sprite bloodSprite = new Sprite();
-        bloodSprite.ZIndex = 0;
+        bloodSprite.ZIndex = 1;
+        bloodSprite.ZAsRelative = false;
         AddChild(bloodSprite);
         bloodSprite.Texture = bloodTexture;
         bloodSprite.GlobalPosition = GlobalPosition;

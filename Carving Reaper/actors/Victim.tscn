@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://common/Victim.cs" type="Script" id=1]
 [ext_resource path="res://sprites/NPC/NPC 1.png" type="Texture" id=2]
 [ext_resource path="res://sprites/NPC/NPC 3.png" type="Texture" id=3]
 [ext_resource path="res://sprites/NPC/NPC 2.png" type="Texture" id=4]
 [ext_resource path="res://sprites/NPC/NPC 4.png" type="Texture" id=5]
+[ext_resource path="res://sprites/Dropshadow.png" type="Texture" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "die1"
@@ -176,6 +177,11 @@ collision_mask = 10
 script = ExtResource( 1 )
 skins = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ) ]
 
+[node name="Dropshadow" type="Sprite" parent="."]
+position = Vector2( 4.48305, 75.3229 )
+scale = Vector2( 0.5, 0.316231 )
+texture = ExtResource( 6 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
 anims/die1 = SubResource( 1 )
@@ -191,7 +197,7 @@ position = Vector2( 0, -89 )
 texture = ExtResource( 2 )
 hframes = 4
 vframes = 4
-frame = 15
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
