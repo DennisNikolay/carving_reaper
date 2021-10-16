@@ -30,7 +30,6 @@ public class Victim : KinematicBody2D
         velocity = velocity.MoveToward(direction * maxSpeed, delta * acceleration);
         
         if(avoiding != null){
-            GD.Print(targetAvoid);
             velocity = velocity.MoveToward(targetAvoid, delta * acceleration * 1.5f);
             deltaSum += delta;
             if(deltaSum > 1){
@@ -49,6 +48,26 @@ public class Victim : KinematicBody2D
             return;
 
         Game.IncreaseScore(100);
+        PlayDeadAnimation();
+    }
+
+    public void CheckForObstaclesAndAvoid(){
+        Physics2DDirectSpaceState spaceState = GetWorld2d().DirectSpaceState;
+        Dictionary rayCastResult = spaceState.IntersectRay(GlobalPosition, GlobalPosition + velocity * 100, null, 4);
+        if(rayCastResult.Count > 0
+            && rayCastResult["collider"] is Obstacle 
+            && avoiding != rayCastResult["collider"]
+        ){
+            avoiding = rayCastResult["collider"];
+            if(GlobalPosition.x < 2500){
+                targetAvoid = new Vector2(20000, 0);
+            }else{
+                targetAvoid = new Vector2(20000, 0);
+            }
+        }
+    }
+
+    public void PlayDeadAnimation(){
         float rng = Game.RandomValue;
         if (rng < 0.33f)
         {
@@ -63,23 +82,6 @@ public class Victim : KinematicBody2D
             animationPlayer.Play("die3");
         }
         dying = true;
-    }
-
-    public void CheckForObstaclesAndAvoid(){
-        Physics2DDirectSpaceState spaceState = GetWorld2d().DirectSpaceState;
-        Dictionary rayCastResult = spaceState.IntersectRay(GlobalPosition, GlobalPosition + velocity * 1000, null, 4);
-        if(rayCastResult.Count > 0
-            && rayCastResult["collider"] is Obstacle 
-            && avoiding != rayCastResult["collider"]
-        ){
-            GD.Print("collision");
-            avoiding = rayCastResult["collider"];
-            if(GlobalPosition.x < 2500){
-                targetAvoid = (rayCastResult["collider"] as Obstacle).GlobalPosition + new Vector2(20000, 0);
-            }else{
-                targetAvoid = (rayCastResult["collider"] as Obstacle).GlobalPosition - new Vector2(20000, 0);
-            }
-        }
     }
     
 }
