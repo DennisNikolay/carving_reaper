@@ -1,0 +1,6 @@
+[
+    {
+        "resource":"res://obstacles/Tree.tscn",
+        "weight": 1
+    }
+]

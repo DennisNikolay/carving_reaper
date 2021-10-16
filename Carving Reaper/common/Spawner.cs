@@ -7,31 +7,55 @@ public class Spawner : Node2D
     [Export]
     PackedScene victimScene;
     [Export]
-    float spawnDelay;
-    [Export] 
+    float enemySpawnDelay;
+    [Export]
+    float obstacleMaxSpawnDelay;
+    [Export]
     public NodePath cameraPath;
-
-    ObstacleSpawner spawner;
-    
-    Camera2D mainCam;
-    
-    [Export] 
+    [Export]
     float spawnYOffset = -800;
-    [Export] 
+    [Export]
     int yVariation = 600;
+    [Export]
+    int enemySpawnDelayFactor = 50;
+    [Export]
+    int obstacleMaxSimultaneously = 5;
 
-    public override void _Ready(){
-        InitializeSpawner();
+    ObstacleSpawner obstacleSpawner;
+    ObstacleSpawner enemySpawner;
+    Camera2D mainCam;
+    Timer obstacleSpawnTimer;
+
+    public override void _Ready()
+    {
+        InitializeObstacleSpawner();
+        InitializeEnemySpawner();
         mainCam = GetNode<Camera2D>(cameraPath);
     }
 
-    public void InitializeSpawner(){
-        spawner = new ObstacleSpawner(ReadConfigFromJson("res://configs/defaultSpawnConfig.json"));
+    public override void _Process(float delta)
+    {
+        base._Process(delta);
+    }
+
+    public void InitializeObstacleSpawner()
+    {
+        obstacleSpawner = new ObstacleSpawner(ReadConfigFromJson("res://configs/defaultSpawnConfig.json"));
         Timer timer = new Timer();
-        timer.WaitTime = spawnDelay;
-        timer.SetWaitTime(3);
-        timer.SetAutostart(true);
+        timer.WaitTime = obstacleMaxSpawnDelay;
+        timer.Autostart = true;
         timer.Connect("timeout", this, nameof(SpawnRandomObject));
+        AddChild(timer);
+        obstacleSpawnTimer = timer;
+    }
+
+    public void InitializeEnemySpawner()
+    {
+        enemySpawner = new ObstacleSpawner(ReadConfigFromJson("res://configs/enemySpawnConfig.json"));
+        Timer timer = new Timer();
+        timer.WaitTime = enemySpawnDelay;
+        timer.Autostart = true;
+        timer.Connect("timeout", this, nameof(SpawnRandomEnemy));
         AddChild(timer);
     }
 
@@ -42,7 +66,8 @@ public class Spawner : Node2D
         JSONParseResult parsedJson = JSON.Parse(configFile.GetAsText());
         SpawnableConfig[] spawnableConfigs = new SpawnableConfig[(parsedJson.Result as Godot.Collections.Array).Count];
         int lastIndex = 0;
-        foreach(Dictionary dictionary in parsedJson.Result as Godot.Collections.Array){
+        foreach (Dictionary dictionary in parsedJson.Result as Godot.Collections.Array)
+        {
             SpawnableConfig objConf = new SpawnableConfig();
             objConf.resource = (string)dictionary["resource"];
             objConf.weight = (float)dictionary["weight"];
@@ -52,17 +77,30 @@ public class Spawner : Node2D
         return spawnableConfigs;
     }
 
-    public void SpawnRandomObject(){
+    public void SpawnRandomObject()
+    {
+        SpawnHelper(obstacleSpawner, obstacleMaxSimultaneously);
+        obstacleSpawnTimer.WaitTime = (obstacleMaxSpawnDelay - (Game.Score/enemySpawnDelayFactor));
+    }
+
+    public void SpawnRandomEnemy()
+    {
+        SpawnHelper(enemySpawner, 1);
+    }
+
+    public void SpawnHelper(ObstacleSpawner spawner, int maxSimultaneously)
+    {
         Random rng = new Random();
-        int randomCount = rng.Next(1, 5);
-        for(int i = 0; i < randomCount; i++){
+        int randomCount = rng.Next(1, maxSimultaneously);
+        for (int i = 0; i < randomCount; i++)
+        {
             float xOffset = 900 - rng.Next(0, 1800);
-            float smallYvariaton = yVariation/2 - rng.Next(0, yVariation);
+            float smallYvariaton = yVariation / 2 - rng.Next(0, yVariation);
             Node2D node2d = spawner.SpawnRandomObject(
                 mainCam.GlobalPosition.x + xOffset,
                 mainCam.GlobalPosition.y + spawnYOffset + smallYvariaton
             );
-            if(node2d != null)
+            if (node2d != null)
                 AddChild(node2d);
         }
     }

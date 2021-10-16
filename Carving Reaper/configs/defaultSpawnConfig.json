@@ -1,14 +1,10 @@
 [
     {
-        "resource": "res://obstacles/Stone.tscn",
-        "weight": 1
-    },
-    {
-        "resource":"res://obstacles/Tree.tscn",
-        "weight": 1
-    },
-    {
         "resource":"res://obstacles/TreeStomp.tscn",
+        "weight": 1
+    },
+    {
+        "resource": "res://obstacles/Stone.tscn",
         "weight": 1
     }
 ]
