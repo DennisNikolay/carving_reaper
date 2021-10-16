@@ -17,7 +17,7 @@ font_data = ExtResource( 6 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 100, 1e+07 )
 
-[node name="Level" type="YSort"]
+[node name="Level" type="Node2D"]
 script = ExtResource( 5 )
 scoreLabelPath = NodePath("HUD/ScoreLabel")
 playerPath = NodePath("CarvingReaper")
@@ -52,10 +52,10 @@ drag_margin_bottom = 0.6
 [node name="ScoreLabel" type="Label" parent="HUD"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -288.389
-margin_top = 9.48685
-margin_right = -11.3894
-margin_bottom = 111.487
+margin_left = -296.167
+margin_top = 15.4699
+margin_right = -19.1672
+margin_bottom = 129.47
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.0941176, 0.12549, 0.192157, 1 )
 text = "12312"

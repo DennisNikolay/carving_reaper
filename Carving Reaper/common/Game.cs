@@ -28,4 +28,14 @@ public class Game
         Score += amount;
         instance.changeScoreEvent?.Invoke(Score);
     }
+
+    public static int RandomRange(int min = 0, int max = 1)
+    {
+        return (int)(random.NextDouble() * (max - min) + min);
+    }
+
+    public static float RandomRange(float min = 0.0f, float max = 1.0f)
+    {
+        return (float)(random.NextDouble() * (max - min) + min);
+    }
 }

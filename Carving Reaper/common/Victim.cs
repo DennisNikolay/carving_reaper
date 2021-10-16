@@ -56,8 +56,7 @@ public class Victim : KinematicBody2D
 
     void BloodSpawn()
     {
-        float rng = Game.RandomValue * 6 + 1;
-        SpawnBlood(Mathf.FloorToInt(rng));
+        SpawnBlood(Game.RandomRange(1, 6));
     }
 
     void SpawnBlood(int id)
@@ -65,7 +64,7 @@ public class Victim : KinematicBody2D
         string path = $"{bloodFolder}Blood0{id}.png";
         StreamTexture bloodTexture = ResourceLoader.Load<StreamTexture>(path);
         Sprite bloodSprite = new Sprite();
-        bloodSprite.ZIndex = 1;
+        bloodSprite.ZIndex = 0;
         AddChild(bloodSprite);
         bloodSprite.Texture = bloodTexture;
         bloodSprite.GlobalPosition = GlobalPosition;
