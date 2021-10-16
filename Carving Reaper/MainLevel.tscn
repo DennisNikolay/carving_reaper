@@ -1,17 +1,29 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://actors/CarvingReaper.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/Obstacle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sprites/testbackground.jpg" type="Texture" id=3]
+[ext_resource path="res://actors/Victim.tscn" type="PackedScene" id=4]
+[ext_resource path="res://common/Level.cs" type="Script" id=5]
+[ext_resource path="res://misc/fonts/Snowburst_One/SnowburstOne-Regular.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 90
+outline_size = 3
+outline_color = Color( 0.101961, 0.133333, 0.196078, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 6 )
 
 [node name="Level" type="Node2D"]
+script = ExtResource( 5 )
+scoreLabelPath = NodePath("HUD/ScoreLabel")
 
 [node name="testbackground" type="Sprite" parent="."]
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
 [node name="CarvingReaper" parent="." instance=ExtResource( 1 )]
-collision_layer = 2
 collision_mask = 6
 
 [node name="Camera2D" type="Camera2D" parent="CarvingReaper"]
@@ -22,3 +34,36 @@ smoothing_enabled = true
 position = Vector2( -34.7888, -237.371 )
 collision_layer = 4
 collision_mask = 2
+
+[node name="Victim" parent="." instance=ExtResource( 4 )]
+position = Vector2( -952.253, -374.506 )
+
+[node name="Victim2" parent="." instance=ExtResource( 4 )]
+position = Vector2( -835.784, 405.835 )
+
+[node name="Victim3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 83.0247, 471.834 )
+
+[node name="Victim4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 895.718, 334.66 )
+
+[node name="Victim5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 37.7313, -532.385 )
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="HUD"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -288.389
+margin_top = 9.48685
+margin_right = -11.3894
+margin_bottom = 111.487
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.0941176, 0.12549, 0.192157, 1 )
+text = "12312"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -6,9 +6,10 @@ public class CarvingReaper : KinematicBody2D
 
     CarvingReaperMovementState movementState;
 
-   public CarvingReaper(){
-       movementState = new CarvingReaperMovementState();
-   }
+    public CarvingReaper()
+    {
+        movementState = new CarvingReaperMovementState();
+    }
 
     public override void _PhysicsProcess(float delta)
     {
@@ -20,7 +21,7 @@ public class CarvingReaper : KinematicBody2D
     public void HandleObstacleCollision()
     {
         GD.Print("Obstacle hit");
-        GetTree().ReloadCurrentScene();
+        Game.GameOver();
     }
 
     protected Vector2 GetUserMovementInput()
