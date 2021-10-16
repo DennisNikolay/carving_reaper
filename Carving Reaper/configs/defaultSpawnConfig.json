@@ -1,14 +1,26 @@
 [
     {
         "resource":"res://obstacles/TreeStomp.tscn",
-        "weight": 1
+        "weight": 5
     },
     {
         "resource": "res://obstacles/Stone.tscn",
-        "weight": 1
+        "weight": 5
     },
     {
         "resource":"res://obstacles/Tree.tscn",
+        "weight": 5
+    },
+    {
+        "resource":"res://obstacles/Pumpkin.tscn",
+        "weight": 3
+    },
+    {
+        "resource":"res://obstacles/SnowMan.tscn",
+        "weight": 2
+    }, 
+    {
+        "resource":"res://obstacles/Max.tscn",
         "weight": 1
     }
 ]

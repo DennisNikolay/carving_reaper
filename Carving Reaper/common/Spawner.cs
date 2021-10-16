@@ -9,7 +9,7 @@ public class Spawner : Node2D
     [Export]
     float enemySpawnDelay = 4;
     [Export]
-    float obstacleMaxSpawnDelay = 10;
+    float obstacleMaxSpawnDelay = 5;
     [Export]
     public NodePath cameraPath;
     [Export]
