@@ -3,7 +3,6 @@ using System;
 
 public class CarvingReaper : KinematicBody2D
 {
-
     [Export]
     float acceleration = 20;
 
@@ -21,21 +20,30 @@ public class CarvingReaper : KinematicBody2D
 
     protected CarvingReaperMovementState movementState;
     protected Line2D debugArrow;
+    HitBox hitBox;
 
     public CarvingReaper()
     {
         movementState = new CarvingReaperMovementState(
             new MovementData(acceleration, maxSpeed, friction, baseSpeed)
-        );
-    }
+        );    }
 
     public override void _Ready()
     {
         base._Ready();
         CallDeferred(nameof(AddDebugArrow));
+        hitBox = GetNode<HitBox>("HitBox");
     }
 
-
+    public override void _Process(float delta)
+    {
+        base._Process(delta);
+        if (IsAttackJustPressed())
+        {
+            hitBox?.Attack();
+        }
+    }
+    
     public override void _PhysicsProcess(float delta)
     {
         Vector2 velocityAfterInput = movementState.MoveByInput(delta, GetUserMovementInput());
@@ -48,7 +56,7 @@ public class CarvingReaper : KinematicBody2D
     public void HandleObstacleCollision()
     {
         GD.Print("Obstacle hit");
-        GetTree().ReloadCurrentScene();
+        Game.GameOver();
     }
 
     protected void AddDebugArrow()
@@ -92,4 +100,8 @@ public class CarvingReaper : KinematicBody2D
         return Input.GetActionStrength("move_down");
     }
 
+    protected bool IsAttackJustPressed()
+    {
+        return Input.IsActionJustPressed("attack");
+    }
 }

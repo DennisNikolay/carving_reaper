@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/skiing-turning - 05.wav-a761dcc6914abcc9ad8589b082bd2b22.sample"
+
+[deps]
+
+source_file="res://sounds/SFX/Skiing-turning/skiing-turning - 05.wav"
+dest_files=[ "res://.import/skiing-turning - 05.wav-a761dcc6914abcc9ad8589b082bd2b22.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

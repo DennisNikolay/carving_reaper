@@ -11,6 +11,7 @@ radius = 36.5435
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+self_modulate = Color( 0.101961, 1, 0, 1 )
 scale = Vector2( 2.69968, 3.04856 )
 shape = SubResource( 1 )
 
@@ -19,6 +20,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+self_modulate = Color( 1, 0, 0, 1 )
 shape = SubResource( 2 )
 
 [connection signal="body_entered" from="Area2D" to="." method="PlayerEntered"]
