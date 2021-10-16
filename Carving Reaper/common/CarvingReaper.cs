@@ -23,6 +23,10 @@ public class CarvingReaper : KinematicBody2D
     protected CarvingReaperMovementState movementState;
     protected Line2D debugArrow;
     HitBox hitBox;
+    AnimationPlayer animationPlayer;
+    Sprite characterSprite;
+
+    const string attackAnim = "attack", idleAnim = "idle", slideStartAnim = "slide_start", slideAnim = "slide", slideEndAnim = "slide_end";
 
     public CarvingReaper()
     {
@@ -36,6 +40,9 @@ public class CarvingReaper : KinematicBody2D
         base._Ready();
         CallDeferred(nameof(AddDebugArrow));
         hitBox = GetNode<HitBox>("HitBox");
+        characterSprite = GetNode<Sprite>("CharacterSprite");
+        animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        animationPlayer.Connect("animation_finished", this, nameof(OnAnimationFinished));
     }
 
     public override void _Process(float delta)
@@ -44,6 +51,43 @@ public class CarvingReaper : KinematicBody2D
         if (IsAttackJustPressed())
         {
             hitBox?.Attack();
+            animationPlayer.Play(attackAnim);
+        }
+    }
+
+    void OnAnimationFinished(string name)
+    {
+        switch (name)
+        {
+            case attackAnim:
+            case slideEndAnim:
+                animationPlayer.Play(idleAnim);
+                break;
+            case slideStartAnim:
+                animationPlayer.Play(slideAnim);
+                break;
+            default:
+                break;
+        }
+    }
+
+    void HandleSlideAnimation(Vector2 velocity)
+    {
+        if (animationPlayer.CurrentAnimation == attackAnim)
+            return;
+
+        if (Mathf.Abs(velocity.x) > maxSpeedX * 0.3f)
+        {
+            if (animationPlayer.CurrentAnimation == idleAnim)
+            {
+                animationPlayer.Play(slideStartAnim);
+                characterSprite.FlipH = velocity.x < 0;
+            }
+        }
+        else
+        {
+            if (animationPlayer.CurrentAnimation != idleAnim)
+                animationPlayer.Play(slideEndAnim);
         }
     }
 
@@ -51,6 +95,7 @@ public class CarvingReaper : KinematicBody2D
     {
         Vector2 velocityAfterInput = movementState.MoveByInput(delta, GetUserMovementInput());
         KinematicCollision2D obstacle = MoveAndCollide(velocityAfterInput);
+        HandleSlideAnimation(velocityAfterInput);
         if (debug && debugArrow != null)
             DrawDebugLine(delta);
     }

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/titlepicture.jpeg-bb4603e71777ede376a27f77274e48dd.stex"
+path="res://.import/Startmenu.png-c436645c10dbfbccdcb8c4f2b49906dc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/UI/titlepicture.jpeg"
-dest_files=[ "res://.import/titlepicture.jpeg-bb4603e71777ede376a27f77274e48dd.stex" ]
+source_file="res://sprites/UI/Startmenu.png"
+dest_files=[ "res://.import/Startmenu.png-c436645c10dbfbccdcb8c4f2b49906dc.stex" ]
 
 [params]
 
