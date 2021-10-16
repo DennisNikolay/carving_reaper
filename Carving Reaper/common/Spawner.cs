@@ -14,7 +14,8 @@ public class Spawner : Node2D
     ObstacleSpawner spawner;
     
     Camera2D mainCam;
-
+    
+    [Export] 
     float spawnYOffset = -800;
 
     public override void _Ready(){
@@ -44,6 +45,7 @@ public class Spawner : Node2D
             objConf.resource = (string)dictionary["resource"];
             objConf.weight = (float)dictionary["weight"];
             spawnableConfigs[lastIndex] = objConf;
+            lastIndex++;
         }
         return spawnableConfigs;
     }

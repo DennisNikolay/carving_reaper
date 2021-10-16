@@ -9,7 +9,6 @@ public class ObstacleSpawner
 
     public ObstacleSpawner(SpawnableConfig[] spawnConfig){
         this.spawnConfig = spawnConfig;
-        GD.Print(spawnConfig[0].resource);
     }
 
     public Node2D SpawnRandomObject(float x, float y){
@@ -20,11 +19,13 @@ public class ObstacleSpawner
         }
         Random rng = new Random();
         float randomValue = rng.Next(100);
+        int currentIndex = 1;
         foreach (SpawnableConfig objConf in spawnConfig)
         {
-            if(randomValue <= (objConf.weight / totalWeight) * 100){
+            if(randomValue <= (objConf.weight / totalWeight) * currentIndex * 100){
                 return SpawnObjectIntoScene(objConf.resource, x, y);
             }
+            currentIndex++;
         }
         return null;
     }
