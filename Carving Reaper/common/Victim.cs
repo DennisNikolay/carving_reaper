@@ -10,10 +10,12 @@ public class Victim : KinematicBody2D
     AnimationPlayer animationPlayer;
     bool dying = false;
     const string bloodFolder = "res://sprites/Blood/";
+    CollisionShape2D collisionShape2D;
 
     public override void _Ready()
     {
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
         baseMaxSpeed = baseMaxSpeed * (1.1f - Game.RandomValue * 0.2f);
         maxSpeed = baseMaxSpeed * (1.2f - 0.4f * Game.RandomValue);
         direction = Vector2.Up + (0.1f - 0.2f * Game.RandomValue) * Vector2.Right;
@@ -52,6 +54,7 @@ public class Victim : KinematicBody2D
             animationPlayer.Play("die3");
         }
         dying = true;
+        collisionShape2D.Disabled = true;
     }
 
     void BloodSpawn()
