@@ -6,3 +6,5 @@
 [node name="Spawner" type="Node2D"]
 script = ExtResource( 1 )
 victimScene = ExtResource( 2 )
+spawnDelay = 4.0
+spawnYOffset = -1200.0
