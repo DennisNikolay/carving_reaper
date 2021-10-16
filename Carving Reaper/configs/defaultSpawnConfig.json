@@ -6,5 +6,9 @@
     {
         "resource": "res://obstacles/Stone.tscn",
         "weight": 1
+    },
+    {
+        "resource": "res://actors/Victim.tscn",
+        "weight": 2
     }
 ]

@@ -94,7 +94,7 @@ tracks/0/keys = {
 
 [sub_resource type="CapsuleShape2D" id=6]
 radius = 60.0
-height = 79.8577
+height = 80.0
 
 [node name="CarvingReaper" type="KinematicBody2D"]
 collision_layer = 2
@@ -115,7 +115,7 @@ texture = ExtResource( 1 )
 flip_h = true
 hframes = 5
 vframes = 4
-frame = 6
+frame = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 modulate = Color( 0.172549, 1, 0, 1 )
