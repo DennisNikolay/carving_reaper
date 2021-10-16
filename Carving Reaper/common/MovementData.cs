@@ -1,12 +1,12 @@
 using Godot;
 public struct MovementData
 {
-    public MovementData(float acceleration, float maxSpeed, float friction, float baseSpeed)
+    public MovementData(float acceleration, float maxSpeed, float friction, float breakPoint)
     {
         this.acceleration = acceleration;
         this.maxSpeed = maxSpeed;
         this.friction = friction;
-        this.breakFriction = 3 * friction;
+        this.breakPoint = breakPoint;
         MoveDirection = Vector2.Up;
     }
     public Vector2 MoveDirection;
@@ -14,10 +14,10 @@ public struct MovementData
     public float acceleration;
     public float maxSpeed;
     public float friction;
-    public float breakFriction;
+    public float breakPoint;
 
     public Vector2 GetBaseVelocity()
     {
-        return Vector2.Up * breakFriction;
+        return Vector2.Up * acceleration;
     }
 }

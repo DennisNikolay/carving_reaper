@@ -13,7 +13,7 @@ public class CarvingReaper : KinematicBody2D
     float friction = 10;
 
     [Export]
-    float baseSpeed = 5;
+    float breakPoint = -10;
 
     [Export]
     bool debug = false;
@@ -25,7 +25,7 @@ public class CarvingReaper : KinematicBody2D
     public CarvingReaper()
     {
         movementState = new CarvingReaperMovementState(
-            new MovementData(acceleration, maxSpeed, friction, baseSpeed)
+            new MovementData(acceleration, maxSpeed, friction, breakPoint)
         );    }
 
     public override void _Ready()

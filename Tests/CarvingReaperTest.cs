@@ -6,7 +6,7 @@ namespace Tests
     public class CarvingReaperTest
     {
 
-        protected MovementData testMovementState = new MovementData(20, 200, 10, 0);
+        protected MovementData testMovementState = new MovementData(20, 200, 10, -10);
 
         [Test]
         public void TestMoveLeft()
@@ -52,7 +52,7 @@ namespace Tests
         public void TestMaxSpeed()
         {
             CarvingReaperMovementState carvingReaperMovementState = new CarvingReaperMovementState(
-                new MovementData(1, 200, 10, 1)
+                new MovementData(1, 200, 10, -10)
             );
             Vector2 velocity = carvingReaperMovementState.MoveByInput(1, new Vector2(0, 400));
             Assert.AreEqual(
