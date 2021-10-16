@@ -25,7 +25,7 @@ public class CarvingReaper : KinematicBody2D
     HitBox hitBox;
     AnimationPlayer animationPlayer;
     Sprite characterSprite;
-    Node2D shadow;
+    Node2D pivot;
 
     public static CarvingReaper activePlayer;
 
@@ -44,7 +44,7 @@ public class CarvingReaper : KinematicBody2D
         activePlayer = this;
         CallDeferred(nameof(AddDebugArrow));
         hitBox = GetNode<HitBox>("HitBox");
-        shadow = GetNode<Node2D>("Shadow");
+        pivot = GetNode<Node2D>("Pivot");
         characterSprite = GetNode<Sprite>("CharacterSprite");
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         animationPlayer.Connect("animation_finished", this, nameof(OnAnimationFinished));
@@ -87,7 +87,7 @@ public class CarvingReaper : KinematicBody2D
             {
                 animationPlayer.Play(slideStartAnim);
                 characterSprite.FlipH = velocity.x < 0;
-                shadow.Scale = new Vector2(characterSprite.FlipH ? 1 : -1, 1);
+                pivot.Scale = new Vector2(characterSprite.FlipH ? 1 : -1, 1);
             }
         }
         else
