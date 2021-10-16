@@ -22,4 +22,10 @@ public class Victim : KinematicBody2D
         velocity = velocity.MoveToward(direction * maxSpeed, delta * acceleration);
         velocity = MoveAndSlide(velocity);
     }
+
+    public void OnHit()
+    {
+        Game.IncreaseScore(100);
+        QueueFree();
+    }
 }
