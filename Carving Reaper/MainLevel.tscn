@@ -7,18 +7,23 @@
 [node name="Level" type="Node2D"]
 
 [node name="testbackground" type="Sprite" parent="."]
-scale = Vector2( 2, 2 )
+position = Vector2( 407.529, -60976.7 )
+scale = Vector2( 2.01879, 100.84 )
 texture = ExtResource( 3 )
-
-[node name="CarvingReaper" parent="." instance=ExtResource( 1 )]
-collision_layer = 2
-collision_mask = 6
-
-[node name="Camera2D" type="Camera2D" parent="CarvingReaper"]
-current = true
-smoothing_enabled = true
+offset = Vector2( -150.319, 269.869 )
 
 [node name="Obstacle" parent="." instance=ExtResource( 2 )]
 position = Vector2( -34.7888, -237.371 )
 collision_layer = 4
 collision_mask = 2
+
+[node name="CarvingReaper" parent="." instance=ExtResource( 1 )]
+position = Vector2( 79.7873, 1455.35 )
+collision_layer = 2
+collision_mask = 6
+acceleration = 1.0
+maxSpeed = 1.0
+
+[node name="Camera2D" type="Camera2D" parent="CarvingReaper"]
+current = true
+smoothing_speed = 1000.0
