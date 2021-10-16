@@ -28,9 +28,9 @@ public class CarvingReaperMovementState
             velocityY
         );
 
-        if (velocity.y >= -10f)
+        if (velocity.y >= movementSettings.breakPoint)
         {
-            velocity.y = (float)-10f;
+            velocity.y = (float)movementSettings.breakPoint;
         }
 
         if (moveInput.Length() == 0)
