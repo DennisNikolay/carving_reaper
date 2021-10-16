@@ -11,6 +11,7 @@ public class Game
     public GameOverEvent gameOverEvent;
     public delegate void ChangeScoreEvent(int newScore);
     public ChangeScoreEvent changeScoreEvent;
+
     public Game()
     {
         instance = this;
