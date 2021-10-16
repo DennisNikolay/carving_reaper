@@ -22,15 +22,12 @@ public class CarvingReaperMovementState
         float velocityX = moveInput.x;
         float velocityY = moveInput.y;
 
-
-        velocity += delta * movementSettings.acceleration * new Vector2(
-            velocityX,
-            velocityY
-        );
+        velocity.x += delta * movementSettings.acceleration * velocityX;
+        velocity.y += delta * (velocityY < 0 ? movementSettings.breakFriction : movementSettings.acceleration) * velocityY;
 
         if (velocity.y >= -10f)
         {
-            velocity.y = (float)-10f;
+            velocity.y = -10f;
         }
 
         if (moveInput.Length() == 0)
@@ -39,6 +36,11 @@ public class CarvingReaperMovementState
         if (velocity.x > movementSettings.maxSpeed)
         {
             velocity.x = movementSettings.maxSpeed;
+        }
+
+        if (velocity.x < movementSettings.maxSpeed)
+        {
+            velocity.x = -movementSettings.maxSpeed;
         }
 
         if (velocity.y > movementSettings.maxSpeed)
