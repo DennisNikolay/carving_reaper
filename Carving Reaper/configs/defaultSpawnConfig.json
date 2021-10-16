@@ -8,7 +8,7 @@
         "weight": 1
     },
     {
-        "resource": "res://actors/Victim.tscn",
-        "weight": 2
+        "resource":"res://obstacles/Tree.tscn",
+        "weight": 1
     }
 ]

@@ -1,6 +1,6 @@
 [
     {
-        "resource":"res://obstacles/Tree.tscn",
+        "resource": "res://actors/Victim.tscn",
         "weight": 1
     }
 ]

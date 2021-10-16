@@ -31,6 +31,8 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1000, 30000 )
 
 [node name="Spawner" parent="." instance=ExtResource( 4 )]
+enemySpawnDelay = 3.0
+obstacleMaxSpawnDelay = 3.0
 cameraPath = NodePath("../CarvingReaper/Camera2D")
 spawnYOffset = -1500.0
 
