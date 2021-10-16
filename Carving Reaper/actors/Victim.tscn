@@ -192,3 +192,7 @@ frame = 15
 visible = false
 self_modulate = Color( 0, 1, 0.505882, 1 )
 shape = SubResource( 8 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[connection signal="body_entered" from="Area2D" to="." method="OnObstacleCollision"]
