@@ -10,6 +10,9 @@ public class Obstacle : StaticBody2D
                 return;
             body.QueueFree();
         }
+        if(body is Victim){
+            (body as Victim).PlayDeadAnimation();
+        }
         if(body is CarvingReaper){
             (body as CarvingReaper).HandleObstacleCollision();
         }
