@@ -14,16 +14,14 @@ public class CarvingReaperMovementState
 
     public Vector2 MoveByInput(float delta, Vector2 moveInput)
     {
-        if (moveInput.Length() > movementSettings.maxSpeed)
-        {
-            moveInput = moveInput * (movementSettings.maxSpeed / moveInput.Length());
-        }
+        moveInput.x = Mathf.Clamp(moveInput.x, -1, 1);
+        moveInput.y = Mathf.Clamp(moveInput.y, -1, 1);
 
         float velocityX = moveInput.x;
         float velocityY = moveInput.y;
 
         velocity.x += delta * movementSettings.acceleration * velocityX;
-        velocity.y += delta * (velocityY < 0 ? movementSettings.acceleration * 2.0f : movementSettings.acceleration) * velocityY;
+        velocity.y += delta * (velocityY > 0 ? movementSettings.breakAcceleration : movementSettings.acceleration) * velocityY;
 
         if (velocity.y >= movementSettings.breakPoint)
         {
@@ -33,19 +31,28 @@ public class CarvingReaperMovementState
         if (moveInput.Length() == 0)
             velocity = velocity.MoveToward(movementSettings.GetBaseVelocity(), delta * movementSettings.friction);
 
-        if (velocity.x > movementSettings.maxSpeed)
+
+        velocity.x = Mathf.Clamp(velocity.x, -movementSettings.maxSpeedX, movementSettings.maxSpeedX);
+        velocity.y = Mathf.Clamp(velocity.y, -movementSettings.maxSpeedY, movementSettings.maxSpeedY);
+
+        if (velocity.x > movementSettings.maxSpeedX)
         {
-            velocity.x = movementSettings.maxSpeed;
+            velocity.x = movementSettings.maxSpeedX;
         }
 
-        if (velocity.x < movementSettings.maxSpeed)
+        if (velocity.x < -movementSettings.maxSpeedX)
         {
-            velocity.x = -movementSettings.maxSpeed;
+            velocity.x = -movementSettings.maxSpeedX;
         }
 
-        if (velocity.y > movementSettings.maxSpeed)
+        if (velocity.y > movementSettings.maxSpeedY)
         {
-            velocity.y = movementSettings.maxSpeed;
+            velocity.y = movementSettings.maxSpeedY;
+        }
+
+        if (velocity.y < -movementSettings.maxSpeedY)
+        {
+            velocity.y = -movementSettings.maxSpeedY;
         }
 
         return velocity;

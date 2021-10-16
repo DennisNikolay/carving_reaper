@@ -14,6 +14,10 @@ config/name="Carving Reaper"
 run/main_scene="res://MainMenu.tscn"
 config/icon="res://sprites/icon.png"
 
+[autoload]
+
+Bgm="*res://entities/BGM.tscn"
+
 [debug]
 
 shapes/collision/shape_color=Color( 1, 1, 1, 0.419608 )

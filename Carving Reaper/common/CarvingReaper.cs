@@ -4,10 +4,12 @@ using System;
 public class CarvingReaper : KinematicBody2D
 {
     [Export]
-    float acceleration = 20;
+    float acceleration = 30.0f;
+    [Export]
+    float breakAcceleration = 70.0f;
 
     [Export]
-    float maxSpeed = 200;
+    float maxSpeedX = 20f, maxSpeedY = 50f;
 
     [Export]
     float friction = 10;
@@ -25,8 +27,9 @@ public class CarvingReaper : KinematicBody2D
     public CarvingReaper()
     {
         movementState = new CarvingReaperMovementState(
-            new MovementData(acceleration, maxSpeed, friction, breakPoint)
-        );    }
+            new MovementData(acceleration, maxSpeedX, maxSpeedY, friction, breakPoint, breakAcceleration)
+        );
+    }
 
     public override void _Ready()
     {
@@ -43,7 +46,7 @@ public class CarvingReaper : KinematicBody2D
             hitBox?.Attack();
         }
     }
-    
+
     public override void _PhysicsProcess(float delta)
     {
         Vector2 velocityAfterInput = movementState.MoveByInput(delta, GetUserMovementInput());
