@@ -4,20 +4,15 @@ using System;
 public class Obstacle : StaticBody2D
 {
 
-    public override void _Ready()
-    {
-
-    }
-
-    public void PlayerEntered(CarvingReaper body){
-        if(!(body is CarvingReaper)){
-            throw new Exception("Game cannot handle colliding things you stupid");
+    public void PlayerEntered(Node body){
+        if(body is Obstacle){
+            if(body == this)
+                return;
+            body.QueueFree();
         }
-        body.HandleObstacleCollision();
-    }
-
-    public void ObstacleCollision(Obstacle obstacle){
-        obstacle.QueueFree();
+        if(body is CarvingReaper){
+            (body as CarvingReaper).HandleObstacleCollision();
+        }
     }
 
 }

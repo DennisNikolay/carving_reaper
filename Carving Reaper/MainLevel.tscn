@@ -33,9 +33,8 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1000, 30000 )
 
 [node name="Spawner" parent="." instance=ExtResource( 4 )]
-spawnDelay = 1.0
 cameraPath = NodePath("../CarvingReaper/Camera2D")
-spawnYOffset = -1200.0
+spawnYOffset = -1500.0
 
 [node name="CarvingReaper" parent="." instance=ExtResource( 1 )]
 collision_mask = 6
