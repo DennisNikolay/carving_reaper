@@ -109,7 +109,6 @@ public class CarvingReaper : KinematicBody2D
 
     public void HandleObstacleCollision()
     {
-        GD.Print("Obstacle hit");
         Game.GameOver();
     }
 

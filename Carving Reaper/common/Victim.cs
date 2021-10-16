@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using Godot.Collections;
+
 public class Victim : KinematicBody2D
 {
     Vector2 velocity, direction;
@@ -12,6 +13,10 @@ public class Victim : KinematicBody2D
     Sprite characterSprite;
     bool dying = false;
     const string bloodFolder = "res://sprites/Blood/";
+
+    Vector2 targetAvoid;
+    bool avoiding;
+
 
     public override void _Ready()
     {
@@ -30,9 +35,15 @@ public class Victim : KinematicBody2D
             return;
 
         base._PhysicsProcess(delta);
-
+        CheckForObstaclesAndAvoid();
         velocity = velocity.MoveToward(direction * maxSpeed, delta * acceleration);
+        
+        if(avoiding){
+            velocity = velocity.MoveToward(targetAvoid, delta * acceleration * 2f);
+        }
+
         velocity = MoveAndSlide(velocity);
+
     }
 
     public void OnHit()
@@ -41,6 +52,31 @@ public class Victim : KinematicBody2D
             return;
 
         Game.IncreaseScore(20);
+        PlayDeadAnimation();
+    }
+
+    public void CheckForObstaclesAndAvoid(){
+        Physics2DDirectSpaceState spaceState = GetWorld2d().DirectSpaceState;
+        Dictionary rayCastMiddle = spaceState.IntersectRay(GlobalPosition, GlobalPosition + velocity * 100, null, 4);
+        Dictionary rayCastLeft = spaceState.IntersectRay(GlobalPosition - new Vector2(100, 0), GlobalPosition - new Vector2(100, 0) + velocity * 100, null, 4);
+        Dictionary rayCastRight = spaceState.IntersectRay(GlobalPosition + new Vector2(100, 0), GlobalPosition + new Vector2(100, 0) + velocity * 100, null, 4);
+
+        if(rayCastLeft.Count > 0
+            || rayCastMiddle.Count > 0
+            || rayCastRight.Count > 0
+        ){
+            avoiding = true;
+            if(GlobalPosition.x < 2500){
+                targetAvoid = new Vector2(-20000, 0);
+            }else{
+                targetAvoid = new Vector2(20000, 0);
+            }
+        }else{
+            avoiding = false;
+        }
+    }
+
+    public void PlayDeadAnimation(){
         float rng = Game.RandomValue;
         if (rng < 0.33f)
         {
@@ -73,4 +109,5 @@ public class Victim : KinematicBody2D
         bloodSprite.Texture = bloodTexture;
         bloodSprite.GlobalPosition = GlobalPosition;
     }
+
 }
