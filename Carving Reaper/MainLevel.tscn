@@ -47,7 +47,7 @@ region_rect = Rect2( 0, 0, 1000, 30000 )
 enemySpawnDelay = 3.0
 obstacleMaxSpawnDelay = 4.0
 cameraPath = NodePath("../CarvingReaper/Camera2D")
-spawnYOffset = -2000.0
+spawnYOffset = -3000.0
 enemySpawnDelayFactor = 120
 
 [node name="CarvingReaper" parent="." instance=ExtResource( 1 )]
@@ -55,13 +55,12 @@ collision_mask = 6
 acceleration = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="CarvingReaper"]
+offset = Vector2( 0, -750 )
 current = true
 zoom = Vector2( 2, 2 )
 limit_left = -2500
 limit_right = 2500
 limit_smoothed = true
-offset_v = -1.0
-drag_margin_bottom = 0.6
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
