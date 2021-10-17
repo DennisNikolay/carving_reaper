@@ -11,6 +11,7 @@ radius = 281.629
 height = 102.611
 
 [node name="SnowMan" type="StaticBody2D"]
+scale = Vector2( 0.5, 0.5 )
 collision_layer = 4
 script = ExtResource( 2 )
 
