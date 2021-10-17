@@ -1,11 +1,47 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://sprites/UI/Startmenu.png" type="Texture" id=1]
-[ext_resource path="res://misc/fonts/Snowburst_One/SnowburstOne-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://misc/fonts/NanumBrushScript-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://common/MainMenu.cs" type="Script" id=3]
 
-[sub_resource type="DynamicFont" id=1]
-size = 80
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.196078, 0.196078, 0.196078, 0.784314 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.411765, 0.411765, 0.411765, 0.862745 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 0.784314 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="DynamicFont" id=4]
+size = 100
 font_data = ExtResource( 2 )
 
 [node name="MainMenu" type="Control"]
@@ -37,7 +73,11 @@ margin_right = 460.013
 margin_bottom = 97.181
 focus_neighbour_top = NodePath("../QuitButton")
 focus_neighbour_bottom = NodePath("../QuitButton")
-custom_fonts/font = SubResource( 1 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 1 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Play"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -52,7 +92,11 @@ margin_right = 462.567
 margin_bottom = 299.217
 focus_neighbour_top = NodePath("../PlayButton")
 focus_neighbour_bottom = NodePath(".")
-custom_fonts/font = SubResource( 1 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 1 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": false

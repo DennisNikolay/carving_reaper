@@ -80,7 +80,7 @@ public class Spawner : Node2D
     public void SpawnRandomObject()
     {
         SpawnHelper(obstacleSpawner, obstacleMaxSimultaneously);
-        obstacleSpawnTimer.WaitTime = (obstacleMaxSpawnDelay - (Game.Score / enemySpawnDelayFactor));
+        obstacleSpawnTimer.WaitTime = Mathf.Max(0.2f, (obstacleMaxSpawnDelay - (Game.Score / enemySpawnDelayFactor)));
     }
 
     public void SpawnRandomEnemy()
