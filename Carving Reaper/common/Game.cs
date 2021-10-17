@@ -20,7 +20,11 @@ public class Game
 
     public static void GameOver()
     {
+        if(Score > Highscore.GetHighscore().ToInt()){
+            Highscore.SetHighscore(Score);
+        }
         instance.gameOverEvent?.Invoke();
+        GD.Print(Highscore.GetHighscore());
     }
 
     public static void IncreaseScore(int amount)
