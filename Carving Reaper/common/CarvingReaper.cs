@@ -30,7 +30,7 @@ public class CarvingReaper : KinematicBody2D
     public static CarvingReaper activePlayer;
 
     const string attackAnim = "attack", idleAnim = "idle", slideStartAnim = "slide_start", slideAnim = "slide", slideEndAnim = "slide_end";
-
+    bool dying = false;
     public CarvingReaper()
     {
         movementState = new CarvingReaperMovementState(
@@ -52,6 +52,9 @@ public class CarvingReaper : KinematicBody2D
 
     public override void _Process(float delta)
     {
+        if (dying)
+            return;
+
         base._Process(delta);
         if (IsAttackJustPressed())
         {
@@ -99,6 +102,9 @@ public class CarvingReaper : KinematicBody2D
 
     public override void _PhysicsProcess(float delta)
     {
+        if (dying)
+            return;
+
         Vector2 velocityAfterInput = movementState.MoveByInput(delta, GetUserMovementInput());
         movementState.Velocity = MoveAndSlide(velocityAfterInput);
         HandleSlideAnimation(velocityAfterInput);
@@ -108,6 +114,15 @@ public class CarvingReaper : KinematicBody2D
 
 
     public void HandleObstacleCollision()
+    {
+        if (dying)
+            return;
+
+        animationPlayer.Play("die");
+        dying = true;
+    }
+
+    public void EndGame()
     {
         Game.GameOver();
     }

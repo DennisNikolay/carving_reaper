@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://sprites/Reaper/Reaper Spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://common/CarvingReaper.cs" type="Script" id=2]
@@ -81,7 +81,37 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id=2]
-resource_name = "idle"
+resource_name = "die"
+length = 1.2
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 15, 16, 17 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "EndGame"
+} ]
+}
+
+[sub_resource type="Animation" id=3]
 loop = true
 step = 0.2
 tracks/0/type = "value"
@@ -145,8 +175,7 @@ tracks/4/keys = {
 "values": [ Vector2( 22.7998, 153.789 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "slide"
+[sub_resource type="Animation" id=4]
 length = 0.6
 loop = true
 step = 0.2
@@ -211,8 +240,7 @@ tracks/4/keys = {
 "values": [ Vector2( 105.246, 129.995 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "slide_end"
+[sub_resource type="Animation" id=5]
 length = 0.4
 step = 0.2
 tracks/0/type = "value"
@@ -276,8 +304,7 @@ tracks/4/keys = {
 "values": [ Vector2( 79.8759, 135.901 ), Vector2( 43.5835, 139.561 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "slide_start"
+[sub_resource type="Animation" id=6]
 length = 0.2
 step = 0.2
 tracks/0/type = "value"
@@ -355,7 +382,7 @@ tracks/5/keys = {
 "values": [ Vector2( 71.228, 148.333 ) ]
 }
 
-[sub_resource type="CapsuleShape2D" id=6]
+[sub_resource type="CapsuleShape2D" id=7]
 radius = 60.0
 height = 80.0
 
@@ -371,36 +398,36 @@ __meta__ = {
 }
 
 [node name="Dropshadow" type="Sprite" parent="Pivot"]
-position = Vector2( 39.9173, 165.629 )
-scale = Vector2( 0.6, 0.289 )
+position = Vector2( 0, 178.149 )
+scale = Vector2( 0.5, 0.2891 )
 texture = ExtResource( 13 )
 
 [node name="SnowTrailPos" parent="Pivot" instance=ExtResource( 14 )]
-position = Vector2( 13.0436, 142.628 )
+position = Vector2( -29.7753, 151.448 )
 
 [node name="SnowTrailPos2" parent="Pivot" instance=ExtResource( 14 )]
-position = Vector2( 43.5835, 139.561 )
+position = Vector2( 22.7998, 153.789 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
 anims/attack = SubResource( 1 )
-anims/idle = SubResource( 2 )
-anims/slide = SubResource( 3 )
-anims/slide_end = SubResource( 4 )
-anims/slide_start = SubResource( 5 )
+anims/die = SubResource( 2 )
+anims/idle = SubResource( 3 )
+anims/slide = SubResource( 4 )
+anims/slide_end = SubResource( 5 )
+anims/slide_start = SubResource( 6 )
 
 [node name="CharacterSprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 flip_h = true
 hframes = 5
 vframes = 5
-frame = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 modulate = Color( 0.172549, 1, 0, 1 )
 position = Vector2( 2.21298, 68.6019 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="HitBox" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1.65973, -6.6389 )
