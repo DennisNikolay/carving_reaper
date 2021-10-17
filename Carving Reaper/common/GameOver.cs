@@ -17,7 +17,6 @@ public class GameOver : Control
 
     public void ShowGameOver()
     {
-        Engine.TimeScale = 0;
         Visible = true;
         gameScoreLabel.Visible = false;
         overScoreLabel.Text = $"Score: {Game.Score}";

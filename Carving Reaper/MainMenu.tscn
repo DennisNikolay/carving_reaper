@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://sprites/UI/Startmenu.png" type="Texture" id=1]
 [ext_resource path="res://misc/fonts/NanumBrushScript-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://common/MainMenu.cs" type="Script" id=3]
+[ext_resource path="res://sprites/UI/credits.png" type="Texture" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.196078, 0.196078, 0.196078, 0.784314 )
@@ -68,11 +69,11 @@ __meta__ = {
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 160.013
-margin_top = -22.819
+margin_top = -44.819
 margin_right = 460.013
-margin_bottom = 97.181
+margin_bottom = 86.181
 focus_neighbour_top = NodePath("../QuitButton")
-focus_neighbour_bottom = NodePath("../QuitButton")
+focus_neighbour_bottom = NodePath("../CreditsButton")
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/focus = SubResource( 1 )
@@ -83,15 +84,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="CreditsButton" type="Button" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 160.013
+margin_top = 117.181
+margin_right = 460.013
+margin_bottom = 248.181
+focus_neighbour_top = NodePath("../PlayButton")
+focus_neighbour_bottom = NodePath("../QuitButton")
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 1 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
+text = "Credits"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="QuitButton" type="Button" parent="."]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 162.567
-margin_top = 179.217
+margin_top = 280.217
 margin_right = 462.567
-margin_bottom = 299.217
-focus_neighbour_top = NodePath("../PlayButton")
-focus_neighbour_bottom = NodePath(".")
+margin_bottom = 411.217
+focus_neighbour_top = NodePath("../CreditsButton")
+focus_neighbour_bottom = NodePath("../PlayButton")
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/focus = SubResource( 1 )
@@ -102,5 +122,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Credits" type="TextureRect" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 4 )
+
 [connection signal="pressed" from="PlayButton" to="." method="Play"]
+[connection signal="pressed" from="CreditsButton" to="." method="Credits"]
 [connection signal="pressed" from="QuitButton" to="." method="Quit"]
