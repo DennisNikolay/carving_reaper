@@ -18,6 +18,7 @@ public class Victim : KinematicBody2D
     Vector2 targetAvoid;
     bool avoiding;
     CollisionShape2D collisionShape;
+    const string idleAnim = "idle", slideStartAnim = "slide_start", slideAnim = "slide", slideEndAnim = "slide_end";
 
 
     public override void _Ready()
@@ -26,9 +27,10 @@ public class Victim : KinematicBody2D
         collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
         characterSprite = GetNode<Sprite>("Sprite");
         characterSprite.Texture = skins[Game.RandomRange(0, skins.Count)];
-        baseMaxSpeed = baseMaxSpeed * (1.1f - Game.RandomValue * 0.2f);
-        maxSpeed = baseMaxSpeed * (1.2f - 0.4f * Game.RandomValue);
-        direction = Vector2.Up + (0.1f - 0.2f * Game.RandomValue) * Vector2.Right;
+        maxSpeed = baseMaxSpeed * (1.1f - Game.RandomValue * 0.2f);
+        direction = Vector2.Up + (0.05f - 0.1f * Game.RandomValue) * Vector2.Right;
+        animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        animationPlayer.Connect("animation_finished", this, nameof(OnAnimationFinished));
     }
 
 
@@ -43,12 +45,14 @@ public class Victim : KinematicBody2D
         if (avoiding)
         {
             velocity = velocity.MoveToward(targetAvoid, delta * acceleration * 2f);
-        }else{
+        }
+        else
+        {
             velocity = velocity.MoveToward(direction * maxSpeed, delta * acceleration);
         }
 
         velocity = MoveAndSlide(velocity);
-
+        HandleSlideAnimation(velocity);
     }
 
     public void OnHit()
@@ -87,6 +91,39 @@ public class Victim : KinematicBody2D
             avoiding = false;
         }
     }
+
+    void OnAnimationFinished(string name)
+    {
+        switch (name)
+        {
+            case slideEndAnim:
+                animationPlayer.Play(idleAnim);
+                break;
+            case slideStartAnim:
+                animationPlayer.Play(slideAnim);
+                break;
+            default:
+                break;
+        }
+    }
+
+    void HandleSlideAnimation(Vector2 velocity)
+    {
+        if (Mathf.Abs(velocity.x) > baseMaxSpeed * 0.1f)
+        {
+            if (animationPlayer.CurrentAnimation == idleAnim)
+            {
+                animationPlayer.Play(slideStartAnim);
+                characterSprite.FlipH = velocity.x < 0;
+            }
+        }
+        else
+        {
+            if (animationPlayer.CurrentAnimation != idleAnim)
+                animationPlayer.Play(slideEndAnim);
+        }
+    }
+
 
     public void PlayDeadAnimation()
     {

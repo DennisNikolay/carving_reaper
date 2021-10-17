@@ -16,10 +16,6 @@ public class CarvingReaper : KinematicBody2D
 
     [Export]
     float breakPoint = -900;
-
-    [Export]
-    bool debug = false;
-
     protected CarvingReaperMovementState movementState;
     protected Line2D debugArrow;
     HitBox hitBox;
@@ -42,7 +38,6 @@ public class CarvingReaper : KinematicBody2D
     {
         base._Ready();
         activePlayer = this;
-        CallDeferred(nameof(AddDebugArrow));
         hitBox = GetNode<HitBox>("HitBox");
         pivot = GetNode<Node2D>("Pivot");
         characterSprite = GetNode<Sprite>("CharacterSprite");
@@ -108,8 +103,6 @@ public class CarvingReaper : KinematicBody2D
         Vector2 velocityAfterInput = movementState.MoveByInput(delta, GetUserMovementInput());
         movementState.Velocity = MoveAndSlide(velocityAfterInput);
         HandleSlideAnimation(velocityAfterInput);
-        if (debug && debugArrow != null)
-            DrawDebugLine(delta);
     }
 
 
@@ -125,21 +118,6 @@ public class CarvingReaper : KinematicBody2D
     public void EndGame()
     {
         Game.GameOver();
-    }
-
-    protected void AddDebugArrow()
-    {
-        debugArrow = new Line2D();
-        GetParent().AddChild(debugArrow);
-    }
-    protected void DrawDebugLine(float delta)
-    {
-        Vector2 velocityTarget = GlobalPosition + 10 * movementState.MoveByInput(delta, GetUserMovementInput());
-        debugArrow.RemovePoint(0);
-        debugArrow.RemovePoint(1);
-        debugArrow.AddPoint(GlobalPosition, 0);
-        debugArrow.AddPoint(velocityTarget, 1);
-        debugArrow.Update();
     }
 
     protected Vector2 GetUserMovementInput()
