@@ -76,7 +76,7 @@ public class Level : Node2D
             return;
 
         //On Game Over screen reload when any key is pressed
-        if (@event is InputEventKey && @event.IsPressed())
+        if ((@event is InputEventKey || @event is InputEventJoypadButton) && @event.IsPressed())
         {
             Engine.TimeScale = 1;
             Reload();
