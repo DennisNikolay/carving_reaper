@@ -18,6 +18,7 @@ public class Victim : KinematicBody2D
     Vector2 targetAvoid;
     bool avoiding;
     CollisionShape2D collisionShape;
+    float avoidSum;
     const string idleAnim = "idle", slideStartAnim = "slide_start", slideAnim = "slide", slideEndAnim = "slide_end";
 
 
@@ -44,10 +45,12 @@ public class Victim : KinematicBody2D
 
         if (avoiding)
         {
+            avoidSum += delta;
             velocity = velocity.MoveToward(targetAvoid, delta * acceleration * 2f);
         }
         else
         {
+            avoidSum = 0;
             velocity = velocity.MoveToward(direction * maxSpeed, delta * acceleration);
         }
 
@@ -71,20 +74,23 @@ public class Victim : KinematicBody2D
         Dictionary rayCastLeft = spaceState.IntersectRay(GlobalPosition - new Vector2(150, 0), GlobalPosition - new Vector2(150, 0) + velocity * 100, null, 4);
         Dictionary rayCastRight = spaceState.IntersectRay(GlobalPosition + new Vector2(150, 0), GlobalPosition + new Vector2(150, 0) + velocity * 100, null, 4);
 
-        if (rayCastLeft.Count > 0
+        if ((rayCastLeft.Count > 0
             || rayCastMiddle.Count > 0
             || rayCastRight.Count > 0
+        ) && avoidSum < 10f
         )
         {
-            if (!avoiding && GlobalPosition.x <= 0)
+            avoiding = true;
+            Random rng = new Random();
+            int leftOrRight = rng.Next(0,1);
+            if (leftOrRight == 0)
             {
-                targetAvoid = new Vector2(100000, GlobalPosition.y + 1000);
+                targetAvoid = new Vector2(100000, GlobalPosition.y - 1000);
             }
             else
             {
-                targetAvoid = new Vector2(-100000, GlobalPosition.y + 1000);
+                targetAvoid = new Vector2(-100000, GlobalPosition.y - 1000);
             }
-            avoiding = true;
         }
         else
         {
