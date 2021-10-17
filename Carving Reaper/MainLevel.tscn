@@ -34,12 +34,12 @@ playerPath = NodePath("CarvingReaper")
 gameOverPath = NodePath("HUD/GameOver")
 
 [node name="Snow" type="Sprite" parent="."]
-position = Vector2( 4.99305, -72765.2 )
+position = Vector2( 4.993, -727650 )
 scale = Vector2( 5, 5 )
 z_index = -1
 texture = ExtResource( 3 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 1000, 30000 )
+region_rect = Rect2( 0, 0, 1000, 300000 )
 
 [node name="Spawner" parent="." instance=ExtResource( 4 )]
 enemySpawnDelay = 3.0
