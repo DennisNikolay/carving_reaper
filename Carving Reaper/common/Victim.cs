@@ -13,14 +13,17 @@ public class Victim : KinematicBody2D
     Sprite characterSprite;
     bool dying = false;
     const string bloodFolder = "res://sprites/Blood/";
+    public bool ShouldSpawnBlood = true;
 
     Vector2 targetAvoid;
     bool avoiding;
+    CollisionShape2D collisionShape;
 
 
     public override void _Ready()
     {
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
         characterSprite = GetNode<Sprite>("Sprite");
         characterSprite.Texture = skins[Game.RandomRange(0, skins.Count)];
         baseMaxSpeed = baseMaxSpeed * (1.1f - Game.RandomValue * 0.2f);
@@ -37,8 +40,9 @@ public class Victim : KinematicBody2D
         base._PhysicsProcess(delta);
         CheckForObstaclesAndAvoid();
         velocity = velocity.MoveToward(direction * maxSpeed, delta * acceleration);
-        
-        if(avoiding){
+
+        if (avoiding)
+        {
             velocity = velocity.MoveToward(targetAvoid, delta * acceleration * 2f);
         }
 
@@ -55,28 +59,37 @@ public class Victim : KinematicBody2D
         PlayDeadAnimation();
     }
 
-    public void CheckForObstaclesAndAvoid(){
+    public void CheckForObstaclesAndAvoid()
+    {
         Physics2DDirectSpaceState spaceState = GetWorld2d().DirectSpaceState;
         Dictionary rayCastMiddle = spaceState.IntersectRay(GlobalPosition, GlobalPosition + velocity * 100, null, 4);
         Dictionary rayCastLeft = spaceState.IntersectRay(GlobalPosition - new Vector2(100, 0), GlobalPosition - new Vector2(100, 0) + velocity * 100, null, 4);
         Dictionary rayCastRight = spaceState.IntersectRay(GlobalPosition + new Vector2(100, 0), GlobalPosition + new Vector2(100, 0) + velocity * 100, null, 4);
 
-        if(rayCastLeft.Count > 0
+        if (rayCastLeft.Count > 0
             || rayCastMiddle.Count > 0
             || rayCastRight.Count > 0
-        ){
+        )
+        {
             avoiding = true;
-            if(GlobalPosition.x < 2500){
+            if (GlobalPosition.x < 2500)
+            {
                 targetAvoid = new Vector2(-20000, 0);
-            }else{
+            }
+            else
+            {
                 targetAvoid = new Vector2(20000, 0);
             }
-        }else{
+        }
+        else
+        {
             avoiding = false;
         }
     }
 
-    public void PlayDeadAnimation(){
+    public void PlayDeadAnimation()
+    {
+        collisionShape.SetDeferred("disabled", true);
         float rng = Game.RandomValue;
         if (rng < 0.33f)
         {
@@ -95,6 +108,9 @@ public class Victim : KinematicBody2D
 
     void BloodSpawn()
     {
+        if (!ShouldSpawnBlood)
+            return;
+
         SpawnBlood(Game.RandomRange(1, 6));
     }
 
