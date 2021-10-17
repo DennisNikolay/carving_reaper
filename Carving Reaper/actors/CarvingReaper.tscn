@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://sprites/Reaper/Reaper Spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://common/CarvingReaper.cs" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://sounds/SFX/Skiing-turning/skiing-turning - 01.wav" type="AudioStream" id=12]
 [ext_resource path="res://sprites/Dropshadow.png" type="Texture" id=13]
 [ext_resource path="res://entities/SnowTrailPos.tscn" type="PackedScene" id=14]
+[ext_resource path="res://sounds/SFX/slice.wav" type="AudioStream" id=15]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
@@ -78,6 +79,18 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 22.8, 153.789 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SliceSFX:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -398,15 +411,15 @@ __meta__ = {
 }
 
 [node name="Dropshadow" type="Sprite" parent="Pivot"]
-position = Vector2( 0, 178.149 )
+position = Vector2( 0, 172.81 )
 scale = Vector2( 0.5, 0.2891 )
 texture = ExtResource( 13 )
 
 [node name="SnowTrailPos" parent="Pivot" instance=ExtResource( 14 )]
-position = Vector2( -29.7753, 151.448 )
+position = Vector2( -29.775, 151.448 )
 
 [node name="SnowTrailPos2" parent="Pivot" instance=ExtResource( 14 )]
-position = Vector2( 22.7998, 153.789 )
+position = Vector2( 22.8, 153.789 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
@@ -422,6 +435,7 @@ texture = ExtResource( 1 )
 flip_h = true
 hframes = 5
 vframes = 5
+frame = 11
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 modulate = Color( 0.172549, 1, 0, 1 )
@@ -440,5 +454,8 @@ autoplay = true
 script = ExtResource( 8 )
 slideSounds = [ ExtResource( 12 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 11 ) ]
 idleSound = ExtResource( 4 )
+
+[node name="SliceSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 15 )
 
 [editable path="HitBox"]
