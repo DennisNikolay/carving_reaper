@@ -77,13 +77,12 @@ public class Victim : KinematicBody2D
         if ((rayCastLeft.Count > 0
             || rayCastMiddle.Count > 0
             || rayCastRight.Count > 0
-        ) && avoidSum < 10f
+        ) && avoidSum < 1f
         )
         {
-            avoiding = true;
             Random rng = new Random();
             int leftOrRight = rng.Next(0,1);
-            if (leftOrRight == 0)
+            if (!avoiding && leftOrRight == 0)
             {
                 targetAvoid = new Vector2(100000, GlobalPosition.y - 1000);
             }
@@ -91,6 +90,7 @@ public class Victim : KinematicBody2D
             {
                 targetAvoid = new Vector2(-100000, GlobalPosition.y - 1000);
             }
+            avoiding = true;
         }
         else
         {
