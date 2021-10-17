@@ -27,7 +27,7 @@ public class Obstacle : StaticBody2D
             }
             else
             {
-                (body as Victim).ShouldSpawnBlood = false;
+                (body as Victim).WasSlashed = false;
                 (body as Victim).PlayDeadAnimation();
             }
         }

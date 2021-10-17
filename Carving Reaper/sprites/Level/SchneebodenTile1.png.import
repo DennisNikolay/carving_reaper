@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SchneebodenTile.png-ebd3481e28f2008cd540e58d157b233d.stex"
+path="res://.import/SchneebodenTile1.png-7a4b4538f86baf98c8bda4361ddb08e5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Level/SchneebodenTile.png"
-dest_files=[ "res://.import/SchneebodenTile.png-ebd3481e28f2008cd540e58d157b233d.stex" ]
+source_file="res://sprites/Level/SchneebodenTile1.png"
+dest_files=[ "res://.import/SchneebodenTile1.png-7a4b4538f86baf98c8bda4361ddb08e5.stex" ]
 
 [params]
 

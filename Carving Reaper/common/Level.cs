@@ -16,10 +16,13 @@ public class Level : Node2D
     CarvingReaper player;
     float prevScorePos = 0;
     bool gameOverActive = false;
+    Sprite snowSprite;
 
     public override void _Ready()
     {
         scoreLabel = GetNode<Label>(scoreLabelPath);
+        snowSprite = GetNode<Sprite>("Snow");
+        snowSprite.Texture = ResourceLoader.Load<Texture>($"res://sprites/Level/SchneebodenTile{Game.RandomRange(1, 3)}.png");
         player = GetNode<CarvingReaper>(playerPath);
         game = new Game();
         game.gameOverEvent += GameOver;

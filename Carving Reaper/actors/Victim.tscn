@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://common/Victim.cs" type="Script" id=1]
 [ext_resource path="res://sprites/NPC/NPC 1.png" type="Texture" id=2]
@@ -103,6 +103,23 @@ tracks/1/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=9]
+resource_name = "die4"
+length = 0.4
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 16, 17 ]
+}
+
 [sub_resource type="Animation" id=4]
 length = 0.8
 loop = true
@@ -191,6 +208,7 @@ autoplay = "idle"
 anims/die1 = SubResource( 1 )
 anims/die2 = SubResource( 2 )
 anims/die3 = SubResource( 3 )
+anims/die4 = SubResource( 9 )
 anims/idle = SubResource( 4 )
 anims/slide = SubResource( 5 )
 anims/slide_end = SubResource( 6 )
@@ -199,9 +217,9 @@ anims/slide_start = SubResource( 7 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -89 )
 texture = ExtResource( 2 )
-hframes = 4
+hframes = 5
 vframes = 4
-frame = 9
+frame = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 self_modulate = Color( 0, 1, 0.505882, 1 )

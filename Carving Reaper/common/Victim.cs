@@ -14,7 +14,7 @@ public class Victim : KinematicBody2D
     Sprite characterSprite;
     bool dying = false;
     const string bloodFolder = "res://sprites/Blood/";
-    public bool ShouldSpawnBlood = true;
+    public bool WasSlashed = true;
     AudioStreamPlayer2D deadSoundSource;
 
     Vector2 targetAvoid;
@@ -128,25 +128,38 @@ public class Victim : KinematicBody2D
     public void PlayDeadAnimation()
     {
         collisionShape.SetDeferred("disabled", true);
-        float rng = Game.RandomValue;
-        if (rng < 0.33f)
+        if (WasSlashed)
         {
-            animationPlayer.Play("die1");
-        }
-        else if (rng < 0.66f)
-        {
-            animationPlayer.Play("die2");
+            float rng = Game.RandomValue;
+            if (rng < 0.33f)
+            {
+                animationPlayer.Play("die1");
+            }
+            else if (rng < 0.66f)
+            {
+                animationPlayer.Play("die2");
+            }
+            else
+            {
+                animationPlayer.Play("die3");
+            }
         }
         else
         {
-            animationPlayer.Play("die3");
+            int die = Game.RandomRange(1, 9);
+            if (die > 4)
+                die = 4;
+            animationPlayer.Play($"die{die}");
         }
+
+
+
         dying = true;
     }
 
     void BloodSpawn()
     {
-        if (!ShouldSpawnBlood)
+        if (!WasSlashed)
             return;
 
         SpawnBlood(Game.RandomRange(1, 7));
