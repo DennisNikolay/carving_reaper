@@ -5,13 +5,14 @@ public class GameOver : Control
 {
     [Export] NodePath scoreLabelPath;
 
-    Label gameScoreLabel, overScoreLabel;
+    Label gameScoreLabel, overScoreLabel, highScoreLabel;
     bool gameOverActive = false;
 
     public override void _Ready()
     {
         gameScoreLabel = GetNode<Label>(scoreLabelPath);
         overScoreLabel = GetNode<Label>("ScoreText");
+        highScoreLabel = GetNode<Label>("HighScoreText");
         Visible = false;
     }
 
@@ -19,6 +20,7 @@ public class GameOver : Control
     {
         Visible = true;
         gameScoreLabel.Visible = false;
-        overScoreLabel.Text = $"Score: {Game.Score}";
+        highScoreLabel.Text = $"High Score: {Highscore.GetHighscore()}";
+        overScoreLabel.Text = $"Your Score: {Game.Score}";
     }
 }
