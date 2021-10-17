@@ -22,7 +22,7 @@ public class CarvingReaperMovementState
         float velocityX = moveInput.x;
         float velocityY = moveInput.y;
 
-        velocity.x += delta * movementSettings.acceleration * velocityX;
+        velocity.x += delta * movementSettings.acceleration * velocityX * 1.4f;
         velocity.y += delta * (velocityY > 0 ? movementSettings.breakAcceleration : movementSettings.acceleration) * velocityY;
 
         if (velocity.y >= movementSettings.breakPoint)

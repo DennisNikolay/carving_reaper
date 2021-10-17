@@ -383,8 +383,8 @@ tracks/5/keys = {
 }
 
 [sub_resource type="CapsuleShape2D" id=7]
-radius = 60.0
-height = 80.0
+radius = 30.0871
+height = 92.8393
 
 [node name="CarvingReaper" type="KinematicBody2D"]
 z_index = 2
@@ -424,9 +424,8 @@ hframes = 5
 vframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 modulate = Color( 0.172549, 1, 0, 1 )
-position = Vector2( 2.21298, 68.6019 )
+position = Vector2( -1.77536, 68.317 )
 shape = SubResource( 7 )
 
 [node name="HitBox" parent="." instance=ExtResource( 3 )]
