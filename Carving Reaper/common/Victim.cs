@@ -39,11 +39,12 @@ public class Victim : KinematicBody2D
 
         base._PhysicsProcess(delta);
         CheckForObstaclesAndAvoid();
-        velocity = velocity.MoveToward(direction * maxSpeed, delta * acceleration);
 
         if (avoiding)
         {
             velocity = velocity.MoveToward(targetAvoid, delta * acceleration * 2f);
+        }else{
+            velocity = velocity.MoveToward(direction * maxSpeed, delta * acceleration);
         }
 
         velocity = MoveAndSlide(velocity);
@@ -63,23 +64,23 @@ public class Victim : KinematicBody2D
     {
         Physics2DDirectSpaceState spaceState = GetWorld2d().DirectSpaceState;
         Dictionary rayCastMiddle = spaceState.IntersectRay(GlobalPosition, GlobalPosition + velocity * 100, null, 4);
-        Dictionary rayCastLeft = spaceState.IntersectRay(GlobalPosition - new Vector2(100, 0), GlobalPosition - new Vector2(100, 0) + velocity * 100, null, 4);
-        Dictionary rayCastRight = spaceState.IntersectRay(GlobalPosition + new Vector2(100, 0), GlobalPosition + new Vector2(100, 0) + velocity * 100, null, 4);
+        Dictionary rayCastLeft = spaceState.IntersectRay(GlobalPosition - new Vector2(150, 0), GlobalPosition - new Vector2(150, 0) + velocity * 100, null, 4);
+        Dictionary rayCastRight = spaceState.IntersectRay(GlobalPosition + new Vector2(150, 0), GlobalPosition + new Vector2(150, 0) + velocity * 100, null, 4);
 
         if (rayCastLeft.Count > 0
             || rayCastMiddle.Count > 0
             || rayCastRight.Count > 0
         )
         {
-            avoiding = true;
-            if (GlobalPosition.x < 2500)
+            if (!avoiding && GlobalPosition.x <= 0)
             {
-                targetAvoid = new Vector2(-20000, 0);
+                targetAvoid = new Vector2(100000, GlobalPosition.y + 1000);
             }
             else
             {
-                targetAvoid = new Vector2(20000, 0);
+                targetAvoid = new Vector2(-100000, GlobalPosition.y + 1000);
             }
+            avoiding = true;
         }
         else
         {
