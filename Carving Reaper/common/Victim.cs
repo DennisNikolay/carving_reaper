@@ -83,16 +83,7 @@ public class Victim : KinematicBody2D
         ) && avoidSum < 1f
         )
         {
-            Random rng = new Random();
-            int leftOrRight = rng.Next(0, 1);
-            if (!avoiding && leftOrRight == 0)
-            {
-                targetAvoid = new Vector2(100000, GlobalPosition.y - 1000);
-            }
-            else
-            {
-                targetAvoid = new Vector2(-100000, GlobalPosition.y - 1000);
-            }
+            targetAvoid = new Vector2(-100000, GlobalPosition.y - 1000);
             avoiding = true;
         }
         else
