@@ -7,6 +7,7 @@ public class Victim : KinematicBody2D
     Vector2 velocity, direction;
     [Export] float baseMaxSpeed = 1000;
     [Export] float acceleration = 900;
+    [Export] Array<AudioStream> deadSounds = new Array<AudioStream>();
     [Export] Array<Texture> skins = new Array<Texture>();
     float maxSpeed;
     AnimationPlayer animationPlayer;
@@ -14,6 +15,7 @@ public class Victim : KinematicBody2D
     bool dying = false;
     const string bloodFolder = "res://sprites/Blood/";
     public bool ShouldSpawnBlood = true;
+    AudioStreamPlayer2D deadSoundSource;
 
     Vector2 targetAvoid;
     bool avoiding;
@@ -26,6 +28,7 @@ public class Victim : KinematicBody2D
     {
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
+        deadSoundSource = GetNode<AudioStreamPlayer2D>("DeadSound");
         characterSprite = GetNode<Sprite>("Sprite");
         characterSprite.Texture = skins[Game.RandomRange(0, skins.Count)];
         maxSpeed = baseMaxSpeed * (1.1f - Game.RandomValue * 0.2f);
@@ -81,7 +84,7 @@ public class Victim : KinematicBody2D
         )
         {
             Random rng = new Random();
-            int leftOrRight = rng.Next(0,1);
+            int leftOrRight = rng.Next(0, 1);
             if (!avoiding && leftOrRight == 0)
             {
                 targetAvoid = new Vector2(100000, GlobalPosition.y - 1000);
@@ -155,7 +158,11 @@ public class Victim : KinematicBody2D
         if (!ShouldSpawnBlood)
             return;
 
-        SpawnBlood(Game.RandomRange(1, 6));
+        SpawnBlood(Game.RandomRange(1, 7));
+        deadSoundSource.Stream = deadSounds[Game.RandomRange(0, deadSounds.Count)];
+        deadSoundSource.VolumeDb = Game.RandomRange(0.0f, 5.0f);
+        deadSoundSource.PitchScale = Game.RandomRange(0.9f, 1.1f);
+        deadSoundSource.Play();
     }
 
     void SpawnBlood(int id)

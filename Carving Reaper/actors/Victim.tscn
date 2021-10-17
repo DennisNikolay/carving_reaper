@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://common/Victim.cs" type="Script" id=1]
 [ext_resource path="res://sprites/NPC/NPC 1.png" type="Texture" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://sprites/NPC/NPC 2.png" type="Texture" id=4]
 [ext_resource path="res://sprites/NPC/NPC 4.png" type="Texture" id=5]
 [ext_resource path="res://sprites/Dropshadow.png" type="Texture" id=6]
+[ext_resource path="res://sounds/SFX/deadSounds/ski-fahrer-death-03.wav" type="AudioStream" id=7]
+[ext_resource path="res://sounds/SFX/deadSounds/ski-fahrer-death-epic.wav" type="AudioStream" id=8]
+[ext_resource path="res://sounds/SFX/deadSounds/ski-fahrer-death-01.wav" type="AudioStream" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "die1"
@@ -175,6 +178,7 @@ z_index = 2
 collision_layer = 8
 collision_mask = 10
 script = ExtResource( 1 )
+deadSounds = [ ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ) ]
 skins = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ) ]
 
 [node name="Dropshadow" type="Sprite" parent="."]
@@ -202,3 +206,7 @@ frame = 9
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 self_modulate = Color( 0, 1, 0.505882, 1 )
 shape = SubResource( 8 )
+
+[node name="DeadSound" type="AudioStreamPlayer2D" parent="."]
+max_distance = 3000.0
+attenuation = 0.4

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ski-fahrer-death-epic.wav-d6fa4da9f407c084b114fb449702c2c7.sample"
+
+[deps]
+
+source_file="res://sounds/SFX/deadSounds/ski-fahrer-death-epic.wav"
+dest_files=[ "res://.import/ski-fahrer-death-epic.wav-d6fa4da9f407c084b114fb449702c2c7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

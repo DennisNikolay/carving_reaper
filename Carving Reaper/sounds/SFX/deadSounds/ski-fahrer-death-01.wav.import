@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ski-fahrer-death-01.wav-3d379de0c46528c8199e1df855b044a5.sample"
+
+[deps]
+
+source_file="res://sounds/SFX/deadSounds/ski-fahrer-death-01.wav"
+dest_files=[ "res://.import/ski-fahrer-death-01.wav-3d379de0c46528c8199e1df855b044a5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
