@@ -19,13 +19,13 @@ public class ObstacleSpawner
         }
         Random rng = new Random();
         float randomValue = rng.Next(100);
-        int currentIndex = 1;
+        float sum = 0;
         foreach (SpawnableConfig objConf in spawnConfig)
         {
-            if(randomValue <= (objConf.weight / totalWeight) * currentIndex * 100){
+            sum += (objConf.weight / totalWeight) * 100;
+            if(randomValue <= sum){
                 return SpawnObjectIntoScene(objConf.resource, x, y);
             }
-            currentIndex++;
         }
         return null;
     }

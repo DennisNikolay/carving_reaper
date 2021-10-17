@@ -25,11 +25,12 @@ public class CarvingReaper : KinematicBody2D
     HitBox hitBox;
     AnimationPlayer animationPlayer;
     Sprite characterSprite;
+    Node2D pivot;
 
     public static CarvingReaper activePlayer;
 
     const string attackAnim = "attack", idleAnim = "idle", slideStartAnim = "slide_start", slideAnim = "slide", slideEndAnim = "slide_end";
-
+    bool dying = false;
     public CarvingReaper()
     {
         movementState = new CarvingReaperMovementState(
@@ -43,6 +44,7 @@ public class CarvingReaper : KinematicBody2D
         activePlayer = this;
         CallDeferred(nameof(AddDebugArrow));
         hitBox = GetNode<HitBox>("HitBox");
+        pivot = GetNode<Node2D>("Pivot");
         characterSprite = GetNode<Sprite>("CharacterSprite");
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         animationPlayer.Connect("animation_finished", this, nameof(OnAnimationFinished));
@@ -50,6 +52,9 @@ public class CarvingReaper : KinematicBody2D
 
     public override void _Process(float delta)
     {
+        if (dying)
+            return;
+
         base._Process(delta);
         if (IsAttackJustPressed())
         {
@@ -85,6 +90,7 @@ public class CarvingReaper : KinematicBody2D
             {
                 animationPlayer.Play(slideStartAnim);
                 characterSprite.FlipH = velocity.x < 0;
+                pivot.Scale = new Vector2(characterSprite.FlipH ? 1 : -1, 1);
             }
         }
         else
@@ -96,6 +102,9 @@ public class CarvingReaper : KinematicBody2D
 
     public override void _PhysicsProcess(float delta)
     {
+        if (dying)
+            return;
+
         Vector2 velocityAfterInput = movementState.MoveByInput(delta, GetUserMovementInput());
         movementState.Velocity = MoveAndSlide(velocityAfterInput);
         HandleSlideAnimation(velocityAfterInput);
@@ -106,7 +115,15 @@ public class CarvingReaper : KinematicBody2D
 
     public void HandleObstacleCollision()
     {
-        GD.Print("Obstacle hit");
+        if (dying)
+            return;
+
+        animationPlayer.Play("die");
+        dying = true;
+    }
+
+    public void EndGame()
+    {
         Game.GameOver();
     }
 

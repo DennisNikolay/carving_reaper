@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/NPC Spritesheet.png-c646d862fc49cbdc5df84a87412577df.stex"
+path="res://.import/trail.png-6a6afb90b37c3ba1fe2fc583fbc0e865.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/NPC/NPC Spritesheet.png"
-dest_files=[ "res://.import/NPC Spritesheet.png-c646d862fc49cbdc5df84a87412577df.stex" ]
+source_file="res://sprites/trail.png"
+dest_files=[ "res://.import/trail.png-6a6afb90b37c3ba1fe2fc583fbc0e865.stex" ]
 
 [params]
 

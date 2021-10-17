@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://sprites/Reaper/Reaper Spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://common/CarvingReaper.cs" type="Script" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://sounds/SFX/Skiing-turning/skiing-turning - 05.wav" type="AudioStream" id=10]
 [ext_resource path="res://sounds/SFX/Skiing-turning/skiing-turning - 07.wav" type="AudioStream" id=11]
 [ext_resource path="res://sounds/SFX/Skiing-turning/skiing-turning - 01.wav" type="AudioStream" id=12]
+[ext_resource path="res://sprites/Dropshadow.png" type="Texture" id=13]
+[ext_resource path="res://entities/SnowTrailPos.tscn" type="PackedScene" id=14]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
@@ -29,9 +31,87 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 11, 12, 13, 14 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/Dropshadow:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 172.81 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Pivot/Dropshadow:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.2891 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Pivot/SnowTrailPos:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -29.775, 151.448 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pivot/SnowTrailPos2:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 22.8, 153.789 ) ]
+}
 
 [sub_resource type="Animation" id=2]
-resource_name = "idle"
+resource_name = "die"
+length = 1.2
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 15, 16, 17 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "EndGame"
+} ]
+}
+
+[sub_resource type="Animation" id=3]
 loop = true
 step = 0.2
 tracks/0/type = "value"
@@ -46,9 +126,56 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3, 4 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/Dropshadow:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 178.149 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Pivot/Dropshadow:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.2891 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Pivot/SnowTrailPos:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -29.7753, 151.448 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pivot/SnowTrailPos2:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 22.7998, 153.789 ) ]
+}
 
-[sub_resource type="Animation" id=3]
-resource_name = "slide"
+[sub_resource type="Animation" id=4]
 length = 0.6
 loop = true
 step = 0.2
@@ -64,9 +191,56 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 6, 7, 8 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/Dropshadow:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 93.0037, 155.319 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Pivot/Dropshadow:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.289 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Pivot/SnowTrailPos:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 65.7623, 136.875 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pivot/SnowTrailPos2:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 105.246, 129.995 ) ]
+}
 
-[sub_resource type="Animation" id=4]
-resource_name = "slide_end"
+[sub_resource type="Animation" id=5]
 length = 0.4
 step = 0.2
 tracks/0/type = "value"
@@ -81,9 +255,56 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 9, 10 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/Dropshadow:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 78.3903, 162.777 ), Vector2( 39.9173, 165.629 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Pivot/Dropshadow:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.7, 0.289 ), Vector2( 0.6, 0.289 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Pivot/SnowTrailPos:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 39.3313, 140.335 ), Vector2( 13.0436, 142.628 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pivot/SnowTrailPos2:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 79.8759, 135.901 ), Vector2( 43.5835, 139.561 ) ]
+}
 
-[sub_resource type="Animation" id=5]
-resource_name = "slide_start"
+[sub_resource type="Animation" id=6]
 length = 0.2
 step = 0.2
 tracks/0/type = "value"
@@ -112,8 +333,56 @@ tracks/1/keys = {
 "method": "PlaySlideSound"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Pivot/Dropshadow:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 58.733, 172.81 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Pivot/Dropshadow:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.6, 0.289 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pivot/SnowTrailPos:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 16.1779, 153.197 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Pivot/SnowTrailPos2:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 71.228, 148.333 ) ]
+}
 
-[sub_resource type="CapsuleShape2D" id=6]
+[sub_resource type="CapsuleShape2D" id=7]
 radius = 60.0
 height = 80.0
 
@@ -123,30 +392,48 @@ collision_layer = 2
 collision_mask = 13
 script = ExtResource( 2 )
 
+[node name="Pivot" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Dropshadow" type="Sprite" parent="Pivot"]
+position = Vector2( 0, 178.149 )
+scale = Vector2( 0.5, 0.2891 )
+texture = ExtResource( 13 )
+
+[node name="SnowTrailPos" parent="Pivot" instance=ExtResource( 14 )]
+position = Vector2( -29.7753, 151.448 )
+
+[node name="SnowTrailPos2" parent="Pivot" instance=ExtResource( 14 )]
+position = Vector2( 22.7998, 153.789 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
 anims/attack = SubResource( 1 )
-anims/idle = SubResource( 2 )
-anims/slide = SubResource( 3 )
-anims/slide_end = SubResource( 4 )
-anims/slide_start = SubResource( 5 )
+anims/die = SubResource( 2 )
+anims/idle = SubResource( 3 )
+anims/slide = SubResource( 4 )
+anims/slide_end = SubResource( 5 )
+anims/slide_start = SubResource( 6 )
 
 [node name="CharacterSprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 flip_h = true
 hframes = 5
 vframes = 5
-frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 modulate = Color( 0.172549, 1, 0, 1 )
 position = Vector2( 2.21298, 68.6019 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="HitBox" parent="." instance=ExtResource( 3 )]
-visible = false
 position = Vector2( 1.65973, -6.6389 )
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2( -0.497986, -53.4988 )
 
 [node name="ReaperSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
@@ -154,3 +441,5 @@ autoplay = true
 script = ExtResource( 8 )
 slideSounds = [ ExtResource( 12 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 11 ) ]
 idleSound = ExtResource( 4 )
+
+[editable path="HitBox"]
